@@ -11,10 +11,10 @@
             </div>
         </section>
         <section class="right">
-            <div class="profile">
+            <a href="/profile" class="profile">
                 <h1>Bunlong Prak</h1>
                 <img src="/images/profile_pic.jpg" alt="Profile">
-            </div>
+            </a>
         </section>
     </nav>
 </div>
@@ -104,6 +104,7 @@
     .profile {
         display: flex;
         align-items: center;
+        text-decoration: none;
 
         h1 {
             font-weight: 600;

@@ -28,6 +28,10 @@
 </nav>
 
 <style lang="scss">
+    .black-paint {
+        opacity: 0;
+        pointer-events: none;
+    }
     .fadeIn {
         animation: fadeIn .6s ease-out;
         animation-fill-mode: forwards;
