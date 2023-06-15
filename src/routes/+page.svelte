@@ -6,7 +6,7 @@
 
 </script>
 <SideNav/>
-<section class="hero">
+<section class="hero" style="background: linear-gradient(rgba(41, 23, 23, 0.6),rgba(41, 23, 23, 0.6)), url('images/paragon.jpeg');">
     <div class="hero-text">
         <div>
             <h1>Wensday Library</h1>
@@ -80,7 +80,6 @@
         display: grid;
         grid-template-columns: 60% 40%;
         height: 650px;
-        background: linear-gradient(rgba(41, 23, 23, 0.6),rgba(41, 23, 23, 0.6)), url('images/paragon.jpeg');
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
