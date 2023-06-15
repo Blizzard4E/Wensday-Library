@@ -1,29 +1,40 @@
-<nav  class="container">
-    <section>
-        <button class="library">Library</button>
-        <div class="search">
-            <input type="text" placeholder="Search by books and authors">
-            <img src="/images/search.png" alt="Search Icon">
-        </div>
-    </section>
-    <section class="right">
-        <div class="profile">
-            <h1>Bunlong Prak</h1>
-            <img src="/images/profile_pic.jpg" alt="Profile">
-        </div>
-        <button class="bell">
-            <img src="/images/bell.png" alt="Bell notification">
-        </button>
-        <button class="filter">
-            <img src="/images/filters.png" alt="Filter icon">
-        </button>
-        <button class="dropdown">
-            <img src="/images/down.png" alt="Dropdown icon">
-        </button>
-    </section>
-</nav>
+<script>
+    import SideNav from "./SideNav.svelte";
+</script>
+<div class="bg">
+    <nav class="container">
+        <section>
+            <a class="library" href="../">Wensday</a>
+            <div class="search">
+                <input type="text" placeholder="Search by books and authors">
+                <img src="/images/search.png" alt="Search Icon">
+            </div>
+        </section>
+        <section class="right">
+            <div class="profile">
+                <h1>Bunlong Prak</h1>
+                <img src="/images/profile_pic.jpg" alt="Profile">
+            </div>
+        </section>
+    </nav>
+</div>
 
 <style lang="scss">
+    .menu {
+        cursor: pointer;
+        margin-right: 1rem;
+        background: none;
+        border: none;
+
+        img {
+            width: 40px;
+        }
+    }
+    .bg {
+        position: relative;
+        z-index: 1;
+        background-color: black;
+    }
     * {
         font-family: 'Poppins', sans-serif;
     }
@@ -46,6 +57,9 @@
         border-radius: 5px;
         background-color: #BADEFA;
         font-family: 'Poppins', sans-serif;
+        text-decoration: none;
+        border: none;
+        color: black;
     }
     button {
         border: none;

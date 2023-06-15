@@ -1,7 +1,11 @@
 <script>
     import Footer from "../components/Footer.svelte";
+    import Nav from "../components/Nav.svelte";
+    import RowOfBooks from "../components/RowOfBooks.svelte";
+    import SideNav from "../components/SideNav.svelte";
 
 </script>
+<SideNav/>
 <section class="hero">
     <div class="hero-text">
         <div>
@@ -23,50 +27,21 @@
     <section id="new-books">
         <h1>New Books</h1>
         <h2>Explore the newest and most recently added books</h2>
-        <div class="carousel">
-            <button class="arrow-left">
-                <img src="images/right-chevron.png" alt="">
-            </button>
-            <button class="arrow-right">
-                <img src="images/right-chevron.png" alt="">
-            </button>
-            <ul>
-                <li>
-                    <div class="bg">
-                        <h1>GeNERATION Z MAGAZINE ISSUE 4</h1>
-                        <img src="images/genz.jpg" alt="">
-                    </div>
-                    <p>Generation Z magazine is Cambodia’s student-run magazine, calling for research articles from university and high school students.</p>
-                </li>
-                <li>
-                    <div class="bg">
-                        <h1>WhO Move My Cheese?</h1>
-                        <img src="images/cheese.jpg" alt="">
-                    </div>
-                    <p>t is an amusing and enlightening story of four characters who live in a "Maze" and look for "Cheese" to nourish them and make them happy.</p>
-                </li>
-                <li>
-                    <div class="bg">
-                        <h1>The tale of ParaGon</h1>
-                        <img src="images/pa.jpeg" alt="">
-                    </div>
-                    <p>Ever the daredevils, they’ve gone to seek adventure in the capital city of Grandin, and Randi can’t help but feel left behind.</p>
-                </li>
-            </ul>
-        </div>
+        <RowOfBooks/>
     </section>
     <section class="naruto">
         <div class="black-bar"></div>
         <div class="grid container">
-            <img src="images/naruto_panel_1_pc.webp" alt="">
+            <div style="display:flex;justify-content:end"><img src="images/naruto_panel_1_pc.webp" alt=""></div>
             <p>“Books are <br> a uniquely <br> portable magic.”</p>
         </div>
     </section>
 </div>
-<Footer/>
 
 <style lang="scss">
     .brown-wrap {
+        position: relative;
+        z-index: 4;
         overflow: hidden;
     }
     .naruto {
@@ -97,14 +72,14 @@
             }
         }
         img {
-            width: 100%;
+            width: 30vw;
             z-index: 1;
         }
     }
     .hero {
         display: grid;
         grid-template-columns: 60% 40%;
-        height: 85vh;
+        height: 650px;
         background: linear-gradient(rgba(41, 23, 23, 0.6),rgba(41, 23, 23, 0.6)), url('images/paragon.jpeg');
         background-size: cover;
         background-repeat: no-repeat;
@@ -167,7 +142,8 @@
     #new-books {
         background-color: #463B33;
         padding: 3rem 0;
-        
+        height: 850px;
+
         h1 {
             text-align: center;
             font-family: 'Poppins', sans-serif;
@@ -181,79 +157,6 @@
             font-weight: normal;
             color: white;
             font-size: 1.5rem;
-        }
-
-        .carousel {
-            position: relative;
-            height: 65vh;
-            margin-top: 2rem;
-            
-            button {
-                user-select: none;
-                position: absolute;
-                top: 20vh;
-                border: none;
-                background: none;
-
-                img {
-                    width: 80px;
-                }
-            }
-            .arrow-left {
-                scale: (-1);
-                left: 8rem;
-            }
-            .arrow-right {
-                right: 8rem;
-            }
-
-            ul {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                display: flex;
-                column-gap: 7rem;
-
-                li {
-                    width: 320px;
-                    position: relative;
-
-                    .bg {
-                        background-color: rgba(0, 0, 0, 0.25);
-                    }
-
-                    h1 {
-                        text-align: start;
-                        width: 50%;
-                        text-transform: uppercase;
-                        position: absolute;
-                        top: .75rem;
-                        left: .5rem;
-                        z-index: 1;
-                        font-family: 'Poppins',sans-serif;
-                        font-weight: 600;
-                        font-size: 1.5rem;
-                        line-height: 2.5rem;
-                    }
-
-                    img {
-                        transform: translate(1.5rem, 1rem);
-                        display: block;
-                        width: 100%;
-                        aspect-ratio: 9/12.5;
-                        object-fit: cover;
-                        margin-bottom: 1rem;
-                    }
-
-                    p {
-                        margin-top: 2rem;
-                        font-size: 1.05rem;
-                        font-family: 'Poppins',sans-serif;
-                        font-weight: lighter;
-                        color: white;
-                    }
-                }
-            }
         }
     }
 </style>
