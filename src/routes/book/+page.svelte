@@ -1,0 +1,113 @@
+<main>
+    <div class="container">
+        <div class="grid-1">
+            <div class="col-1">
+                <h1>Book</h1>
+                <img src="images/cheese.jpg" alt="">
+            </div>
+            <div class="col-2">
+                <div class="title">
+                    <h1>It Ends with Us: A Novel</h1>
+                    <img src="images/title_bg.png" alt="">
+                </div>
+                <div class="info">
+                    <h2>Authors</h2>
+                    <h2>Year</h2>
+                    <h2>Publisher</h2>
+                    <h2>Categories</h2>
+                    <h2>Languages</h2>
+                    <h2>Status</h2>
+                </div>
+                <div class="detail">
+                    <h2>Collen Hoover</h2>
+                    <h2>2016</h2>
+                    <h2>Atria</h2>
+                    <h2>Literary Fiction</h2>
+                    <h2>English</h2>
+                    <h2>Available</h2>
+                </div>
+                <div class="desc">
+                    <h2>Description</h2>
+                    <p>Ever the daredevils, they’ve gone to seek adventure in the capital city of Grandin, and Randi can’t help but feel left behind.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style lang="scss">
+    main {
+        position: relative;
+        padding: 3rem 0;
+        background-color: #463B33;
+
+        .grid-1 {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            h2 {
+                font-family: 'Poppins',sans-serif;
+                color: white;
+                font-weight: 600;
+                font-size: 1.5rem;
+                text-transform: uppercase;
+                margin: 1rem 0;
+            }
+            .col-1 {
+                img {
+                    display: block;
+                    width: 300px;
+                }
+            }
+            .col-2 {
+                position: relative;
+                display: grid;
+                grid-template-areas: 'title title' 
+                                    'info detail' 
+                                    'desc desc';
+                .title {
+                    grid-area: title;
+                    h1 {
+                        position: relative;
+                        z-index: 1;
+                        font-weight: lighter;
+                        margin-left: 10%;
+                    }
+                    img {
+                        position: relative;
+                        display: block;
+                        position: absolute;
+                        width: 800px;
+                        top: -20%;
+                    }
+                }
+                .info {
+                    grid-area: info;
+                }
+                .detail {
+                    grid-area: detail;
+                    h2 {
+                        font-weight: lighter;
+                    }
+                }
+                .desc {
+                    grid-area: desc;
+                    p {
+                        font-family: 'Poppins',sans-serif;
+                        color: white;
+                        font-weight: lighter;
+                        font-size: 1.2rem;
+                        margin: 1rem 0;
+                    }
+                }
+            }
+        }
+    }
+    h1 {
+        font-family: 'Poppins',sans-serif;
+        color: white;
+        font-weight: 600;
+        font-size: 2rem;
+        text-transform: uppercase;
+        margin-bottom: 3rem;
+    }
+</style>

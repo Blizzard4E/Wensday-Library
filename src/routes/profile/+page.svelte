@@ -129,6 +129,8 @@
             font-weight: normal;
             color: white;
             font-size: 2rem;
+            text-transform: uppercase;
+            text-align: center;
         }
 
         .profile-pic {
