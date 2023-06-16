@@ -1,5 +1,18 @@
 <script>
+    import { user } from "../store";
+    import { admin } from "../store";
     import SideNav from "./SideNav.svelte";
+    
+    let userInfo;
+    user.subscribe(value => {
+        userInfo = value
+    })
+
+    let adminInfo;
+    admin.subscribe(value => {
+        adminInfo = value
+    })
+
 </script>
 <div class="bg">
     <nav class="container">
@@ -12,7 +25,11 @@
         </section>
         <section class="right">
             <a href="/profile" class="profile">
-                <h1>Bunlong Prak</h1>
+                {#if adminInfo != null}
+                    <h1 class="admin">{adminInfo.username}</h1>
+                {:else}
+                    <h1>{userInfo.username}</h1>
+                {/if}
                 <img src="/images/profile_pic.jpg" alt="Profile">
             </a>
         </section>
@@ -105,7 +122,9 @@
         display: flex;
         align-items: center;
         text-decoration: none;
-
+        .admin {
+            color: red;
+        }
         h1 {
             font-weight: 600;
             font-size: 1.3rem;
@@ -123,7 +142,10 @@
     .right {
         display: flex;
         column-gap: 1rem;
-        
+        a {
+            color: white;
+            text-decoration: none;
+        }
         button {
             background-color: #F5F5F5;
             padding: .8rem;

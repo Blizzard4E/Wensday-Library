@@ -1,10 +1,20 @@
 <script>
-    import Footer from "../components/Footer.svelte";
+    import Admin from "../components/Admin.svelte";
+import Footer from "../components/Footer.svelte";
     import Nav from "../components/Nav.svelte";
     import RowOfBooks from "../components/RowOfBooks.svelte";
     import SideNav from "../components/SideNav.svelte";
+    import { admin } from "../store.js"
+    let adminInfo;
 
+	admin.subscribe(value => {
+		adminInfo = value;
+	});
 </script>
+
+{#if adminInfo != null}
+    <Admin/>
+{:else}
 <SideNav/>
 <section class="hero" style="background: linear-gradient(rgba(41, 23, 23, 0.6),rgba(41, 23, 23, 0.6)), url('images/paragon.jpeg');">
     <div class="hero-text">
@@ -37,6 +47,7 @@
         </div>
     </section>
 </div>
+{/if}
 
 <style lang="scss">
     .brown-wrap {
