@@ -25,7 +25,9 @@
         </section>
         <section class="right">
             <a href="../">Home</a>
-            <a href="/addBook">Add Book</a>
+            {#if adminInfo != null}
+                <a href="/addBook">Add Book</a>
+            {/if}
             <a href="/profile" class="profile">
                 {#if adminInfo != null}
                     <h1 class="admin">{adminInfo.username}</h1>

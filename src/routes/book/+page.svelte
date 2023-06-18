@@ -1,3 +1,6 @@
+<script>
+    let available = true;
+</script>
 <main>
     <div class="container">
         <div class="grid-1">
@@ -29,6 +32,13 @@
                 <div class="desc">
                     <h2>Description</h2>
                     <p>Ever the daredevils, they’ve gone to seek adventure in the capital city of Grandin, and Randi can’t help but feel left behind.</p>
+                </div>
+                <div>
+                    {#if available}
+                        <button>Borrow</button>
+                    {:else}
+                        <button class="red">Not Available</button>
+                    {/if}
                 </div>
             </div>
         </div>
@@ -109,5 +119,19 @@
         font-size: 2rem;
         text-transform: uppercase;
         margin-bottom: 3rem;
+    }
+    button {
+        text-transform: uppercase;
+        border: none;
+        font-family: 'Poppins',sans-serif;
+        color: white;
+        background-color: black;
+        padding: .5rem 1rem;
+        font-weight: 600;
+        font-size: 1.5rem;
+        cursor: not-allowed;
+    }
+    .red {
+        background-color: rgb(175, 4, 4);
     }
 </style>

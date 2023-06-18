@@ -1,11 +1,11 @@
 import { writable } from 'svelte/store';
 
 export const admin = writable(
-    {
-        admin_id: 1,
-        username: "Thanos",
-        password: "library"
-    }
+    // {
+    //     admin_id: 1,
+    //     username: "Thanos",
+    //     password: "library"
+    // }
 );
 export const user = writable(
     {
