@@ -1,9 +1,8 @@
 <script>
-    import Admin from "../components/Admin.svelte";
-import Footer from "../components/Footer.svelte";
-    import Nav from "../components/Nav.svelte";
-    import RowOfBooks from "../components/RowOfBooks.svelte";
+    import AddAuthor from "../components/AddAuthor.svelte";
+import RowOfBooks from "../components/RowOfBooks.svelte";
     import SideNav from "../components/SideNav.svelte";
+    import UserEdit from "../components/UserEdit.svelte";
     import { admin } from "../store.js"
     let adminInfo;
 
@@ -13,7 +12,8 @@ import Footer from "../components/Footer.svelte";
 </script>
 
 {#if adminInfo != null}
-    <Admin/>
+    <UserEdit/>
+    <AddAuthor/>
 {:else}
 <SideNav/>
 <section class="hero" style="background: linear-gradient(rgba(41, 23, 23, 0.6),rgba(41, 23, 23, 0.6)), url('images/paragon.jpeg');">
