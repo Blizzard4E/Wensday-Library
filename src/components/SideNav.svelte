@@ -30,17 +30,16 @@
 <style lang="scss">
     .black-paint {
         opacity: 0;
-        pointer-events: none;
     }
     .fadeIn {
-        animation: fadeIn .6s ease-out;
-        animation-fill-mode: forwards;
-        opacity: 0;
+        pointer-events: auto;
+        transition: 0.6s ease-out;
+        opacity: 1;
     }
     .fadeOut {
-        animation: fadeOut .6s ease-in-out;
-        animation-fill-mode: forwards;
-        opacity: 1;
+        pointer-events: none;
+        transition: 0.6s ease-in-out;
+        opacity: 0;
     }
     .black-gradient {
         position: absolute;
@@ -133,24 +132,6 @@
             display: block;
             width: 150%;
             transform: translate(-10%,-35%) rotate(-45deg);
-        }
-    }
-    @keyframes fadeIn {
-        0% { 
-            opacity: 0; 
-        }
-        100% { 
-            opacity: 1;
-            pointer-events: auto;
-        }
-    }
-    @keyframes fadeOut {
-        0% { 
-            opacity: 1; 
-        }
-        100% { 
-            opacity: 0;
-            pointer-events: none;
         }
     }
 </style>

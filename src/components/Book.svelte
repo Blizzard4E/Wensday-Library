@@ -1,17 +1,19 @@
 <script>
+    export let book;
     let isHover = false;
 </script>
-<li>
+<a href="/book/{book.book_id}">
     <div class="bg">
-        <h1>GeNERATION Z MAGAZINE ISSUE 4</h1>
-        <img src="images/genz.jpg" alt="">
+        <h1>{book.title}</h1>
+        <img src="{book.cover_image}" alt="">
     </div>
-    <h2>GeNERATION Z MAGAZINE ISSUE 4</h2>
-    <p>Generation Z magazine is Cambodia’s student-run magazine, calling for research articles from university and high school students.</p>
-</li>
+    <h2>{book.title}</h2>
+    <p>{book.description}</p>
+</a>
 
 <style lang="scss">
-    li {
+    a {
+        text-decoration: none;
         cursor: pointer;
         flex-shrink: 0;
         width: 320px;
@@ -37,6 +39,7 @@
             font-size: 1.5rem;
             line-height: 2.5rem;
             color: white;
+            text-align: center;
         }
         h2 {
             position: absolute;
@@ -50,6 +53,7 @@
             opacity: 1;
             text-align: center;
             text-transform: uppercase;
+            width: 100%;
         }
 
         img {

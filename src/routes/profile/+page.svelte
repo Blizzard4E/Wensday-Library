@@ -1,7 +1,47 @@
 <script>
     import Book from "../../components/Book.svelte";
     let tab = 0
-    
+    let user = {
+        user_id: 0,
+        title: "Sophomore",
+        username: "Nate River",
+        gender: "Male",
+        email: "long@paragoniu.edu.kh"
+    }
+    let active_borrow = [
+        {
+            book_id: 0,
+            title: "The Art of Cooking with AI",
+            description: "A cookbook that features recipes created by AI using ingredients from different cuisines and cultures. Learn how to make dishes such as spicy chocolate cake,cheeseburger soup, and sushi pizza.",
+            cover_image: "https://th.bing.com/th/id/OIG.8cBS8p0rHWtRkPrhEDr6?pid=ImgGn"
+        }
+    ]
+    let borrow_history = [
+        {
+            book_id: 0,
+            title: "The Art of Cooking with AI",
+            description: "A cookbook that features recipes created by AI using ingredients from different cuisines and cultures. Learn how to make dishes such as spicy chocolate cake,cheeseburger soup, and sushi pizza.",
+            cover_image: "https://th.bing.com/th/id/OIG.8cBS8p0rHWtRkPrhEDr6?pid=ImgGn"
+        },
+        {
+            book_id: 3,
+            title: "The Lost Planet",
+            description: "A sci-fi novel that follows the adventures of a group of explorers who crash-land on a mysterious planet that seems to be alive and hostile. They must find a way to survive and escape before they are consumed by the planet’s secrets.",
+            cover_image: "https://th.bing.com/th/id/OIG.jWQJLaGTm8_FXG_9i7KR?pid=ImgGn"
+        }
+    ]
+    let balance_histories = [
+        {
+            date: "03, June 2023 11:30 AM",
+            amount: 100,
+            admin_name: "Thanos"
+        },
+        {
+            date: "03, June 2023 11:30 AM",
+            amount: -100,
+            admin_name: "Thanos"
+        }
+    ]
     function setTab(index) {
         tab = index
     }
@@ -17,30 +57,22 @@
     <div class="info">
         <div class="row">
             <div class="container">
-                <h2>Title: Sopomore</h2>
+                <h2>Title: {user.title}</h2>
             </div>
         </div>
         <div class="row">
             <div class="container">
                 <div class="grid">
-                    <h2>Full Name: Nate River</h2>
-                    <h2>User ID: 1321312</h2>
+                    <h2>Username: {user.username}</h2>
+                    <h2>User ID: {user.user_id}</h2>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="container">
                 <div class="grid">
-                    <h2>Gender:  Male</h2>
-                    <h2>Username: bprak</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="container">
-                <div class="grid">
-                    <h2>Date of Birth: 23/08/2004</h2>
-                    <h2>Email: Nateriver@paragoniu.edu.kh</h2>
+                    <h2>Gender: {user.gender}</h2>
+                    <h2>Email: {user.email}</h2>
                 </div>
             </div>
         </div>
@@ -58,32 +90,43 @@
               <th>Amount</th>
               <th>By</th>
             </tr>
-            <tr class="green">
-                <td>6/5/2023 16:41 AM</td>
-                <td>$333</td>
-                <td>Bunlong</td>
-              </tr>
-            <tr class="red">
-              <td>6/5/2023 16:41 AM</td>
-              <td>-$333</td>
-              <td>Bunlong</td>
-            </tr>
+            {#each balance_histories as balance}
+                <tr class:green={balance.amount > 0} class:red={balance.amount < 0}>
+                    <td>{balance.date}</td>
+                    <td>
+                        {#if balance.amount < 0}
+                            -${-balance.amount}
+                        {:else}
+                            ${balance.amount}
+                        {/if}
+                    </td>
+                    <td>{balance.admin_name}</td>
+                </tr>
+            {/each}
         </div>
     </div>
     {/if}
-    {#if tab >= 1 }
+    {#if tab == 1 }
         <div class="books container">
-            <Book/>
-            <Book/>
-            <Book/>
-            <Book/>
-            <Book/>
-            <Book/>
+            {#each active_borrow as book}
+                <div class="center"><Book book={book}/></div>
+            {/each}
+        </div>
+    {/if}
+    {#if tab == 2 }
+        <div class="books container">
+            {#each borrow_history as book}
+                <div class="center"><Book book={book}/></div>
+            {/each}
         </div>
     {/if}
 </main>
 
 <style lang="scss">
+    .center {
+        display: grid;
+        justify-content: center;
+    }
     .table {
         background-color: #533829;
         width: 100%;
@@ -194,7 +237,6 @@
     .books {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        place-items: center;
         padding: 2rem 0;
         row-gap: 1rem;
     }

@@ -9,9 +9,9 @@
                 </div>
             </div>
             <div class="grid">
-                <img src="images/paragon1.jpeg" alt="">
-                <img src="images/book12.jpeg" alt="">
-                <img src="images/paragon3.jpeg" alt="">
+                <img src="../images/paragon1.jpeg" alt="">
+                <img src="../images/book12.jpeg" alt="">
+                <img src="../images/paragon3.jpeg" alt="">
             </div>
         </div>
     </div>

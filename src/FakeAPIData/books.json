@@ -1,0 +1,188 @@
+[
+    {
+       "book_id":2,
+       "title":"The Art of Cooking with AI",
+       "description":"A cookbook that features recipes created by AI using ingredients from different cuisines and cultures. Learn how to make dishes such as spicy chocolate cake,cheeseburger soup, and sushi pizza.",
+       "cover_image":"https://th.bing.com/th/id/OIG.8cBS8p0rHWtRkPrhEDr6?pid=ImgGn",
+       "author":{
+          "author_id":1,
+          "name":"Alice"
+       },
+       "languages":[
+          "English"
+       ],
+       "has_active_borrow_requests":false,
+       "categories":[
+          {
+             "category_id":1,
+             "name":"Cooking",
+             "add_by_admin_id":0
+          }
+       ],
+       "add_by_admin_id":0,
+       "active_borrow_id":0,
+       "publication":{
+          "publication_id":1,
+          "year":2023,
+          "series_title":"The Art of Cooking with AI",
+          "volume":1,
+          "edition":1,
+          "number_of_volumes":1,
+          "number_of_pages":150,
+          "publisher":{
+             "publisher_id":1,
+             "name":"AI Press",
+             "city":"New York"
+          }
+       }
+    },
+    {
+       "book_id":3,
+       "title":"The Lost Planet",
+       "description":"A sci-fi novel that follows the adventures of a group of explorers who crash-land on a mysterious planet that seems to be alive and hostile. They must find a way to survive and escape before they are consumed by the planet’s secrets.",
+       "cover_image":"https://th.bing.com/th/id/OIG.jWQJLaGTm8_FXG_9i7KR?pid=ImgGn",
+       "author":{
+          "author_id":2,
+          "name":"Bob"
+       },
+       "language":[
+          "English"
+       ],
+       "has_active_borrow_requests":false,
+       "categories":[
+          {
+             "category_id":2,
+             "name":"Science Fiction",
+             "add_by_admin_id":0
+          }
+       ],
+       "add_by_admin_id":0,
+       "active_borrow_id":0,
+       "publication":{
+          "publication_id":2,
+          "year":2022,
+          "series_title":"The Lost Planet",
+          "volume":1,
+          "edition":1,
+          "number_of_volumes":3,
+          "number_of_pages":300,
+          "publisher":{
+             "publisher_id":2,
+             "name":"Galaxy Books",
+             "city":"London"
+          }
+       }
+    },
+    {
+       "book_id":4,
+       "title":"How to Be Happy in a Pandemic",
+       "description":"A self-help book that offers practical tips and advice on how to cope with the challenges and stress of living in a pandemic. Learn how to boost your mood,stay healthy,and find joy in everyday life.",
+       "cover_image":"https://th.bing.com/th/id/OIG.ZBZvMJZnW0EnpZGoPkEg?pid=ImgGn",
+       "author":{
+          "author_id":3,
+          "name":"Carol"
+       },
+       "language":[
+          "English"
+       ],
+       "has_active_borrow_requests":false,
+       "categories":[
+          {
+             "category_id":3,
+             "name":"Self-Help",
+             "add_by_admin_id":0
+          }
+       ],
+       "add_by_admin_id":0,
+       "active_borrow_id":0,
+       "publication":{
+          "publication_id":3,
+          "year":2021,
+          "series_title":"How to Be Happy in a Pandemic",
+          "volume":1,
+          "edition":1,
+          "number_of_volumes":1,
+          "number_of_pages":200,
+          "publisher":{
+             "publisher_id":3,
+             "name":"Happy Press",
+             "city":"Sydney"
+          }
+       }
+    },
+    {
+       "book_id":7,
+       "title":"The Mystery of the Missing Diamond",
+       "description":"A thrilling mystery novel that follows the clues left by a master thief who stole a priceless diamond from a museum. Can the detective team catch the culprit before he strikes again?",
+       "cover_image":"https://th.bing.com/th/id/OIG.89ysJOsudt.zsf0yJzp7?pid=ImgGn",
+       "author":{
+          "author_id":6,
+          "name":"Emma"
+       },
+       "language":[
+          "English"
+       ],
+       "has_active_borrow_requests":false,
+       "categories":[
+          {
+             "category_id":6,
+             "name":"Mystery",
+             "add_by_admin_id":0
+          }
+       ],
+       "add_by_admin_id":0,
+       "active_borrow_id":0,
+       "publication":{
+          "publication_id":6,
+          "year":2021,
+          "series_title":"The Mystery of the Missing Diamond",
+          "volume":1,
+          "edition":1,
+          "number_of_volumes":1,
+          "number_of_pages":250,
+          "publisher":{
+             "publisher_id":6,
+             "name":"Clue Books",
+             "city":"Los Angeles"
+          }
+       }
+    },
+    {
+       "book_id":8,
+       "title":"The Art of Origami",
+       "description":"A guide to the ancient Japanese art of paper folding. Learn how to make beautiful and intricate shapes and designs with simple paper sheets. Includes step-by-step instructions and diagrams for beginners and experts.",
+       "cover_image":"https://th.bing.com/th/id/OIG.8tJmJhuTX7VXSHbcoRtd?w=270&h=270&c=6&r=0&o=5&pid=ImgGn",
+       "author":{
+          "author_id":7,
+          "name":"Fumi"
+       },
+       "language":[
+          "English",
+          "Japanese"
+       ],
+       "has_active_borrow_requests":false,
+       "categories":[
+          {
+             "category_id":7,
+             "name":"Art",
+             "add_by_admin_id":0
+          }
+       ],
+       "add_by_admin_id":0,
+       "active_borrow_id":0,
+       "publication":{
+          "publication_id":7,
+          "year":2020,
+          "series_title":"The Art of Origami",
+          "volume":1,
+          "edition":1,
+          "number_of_volumes":1,
+          "number_of_pages":150,
+          "publisher":{
+             "publisher_id":7,
+             "name":"Paper Press",
+             "city":"Tokyo"
+          }
+       }
+    }
+ ]

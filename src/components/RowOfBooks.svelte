@@ -1,7 +1,10 @@
 <script>
     import Book from "./Book.svelte";
+    import fakeData from '../FakeAPIData/books.json'
     let currentPos = 0;
-    let offset = 35.5
+    let offset = 35.5;
+    let books = [];
+    
     function nextSlide() {
         currentPos -= offset;
         console.log(currentPos)
@@ -10,18 +13,19 @@
         currentPos += offset;
         console.log(currentPos)
     }
+    books = fakeData;
 </script>
 <div class="carousel">
     <button class="arrow-left" on:click={() => prevSlide()} class:hide={currentPos == 0}>
         <img src="images/right-chevron.png" alt="">
     </button>
-    <button class="arrow-right" on:click={() => nextSlide()} class:hide={currentPos <= -offset*7}>
+    <button class="arrow-right" on:click={() => nextSlide()} class:hide={currentPos <= -offset*(books.length - 3)}>
         <img src="images/right-chevron.png" alt="">
     </button>
     <div class="slides">
         <ul style="transform: translateX({currentPos}%)">
-            {#each  {length: 10} as _,item}
-                <Book/>
+            {#each  books as book}
+                <Book book={book}/>
             {/each}
         </ul>
     </div>

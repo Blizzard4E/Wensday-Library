@@ -1,17 +1,58 @@
 <script>
-    let available = true;
+    //Replace it with data from API
+    let book = {
+        book_id: 2,
+        title: "The Art of Cooking with AI",
+        description: "A cookbook that features recipes created by AI using ingredients from different cuisines and cultures. Learn how to make dishes such as spicy chocolate cake,cheeseburger soup, and sushi pizza.",
+        cover_image: "https://th.bing.com/th/id/OIG.8cBS8p0rHWtRkPrhEDr6?pid=ImgGn",
+        author: {
+            author_id: 1,
+            name: "Alice"
+        },
+        languages: [
+            "English"
+        ],
+        has_active_borrow_requests: false,
+        categories: [
+            {
+                category_id: 1,
+                name: "Cooking",
+                add_by_admin_id: 0
+            }
+        ],
+        add_by_admin_id: 0,
+        active_borrow_id: 0,
+        publication: {
+            publication_id: 1,
+            year: 2023,
+            series_title: "The Art of Cooking with AI",
+            volume: 1,
+            edition: 1,
+            number_of_volumes: 1,
+            number_of_pages: 150,
+            publisher: {
+            publisher_id: 1,
+            name: "AI Press",
+            city: "New York"
+            }
+        }
+    }
+    //Book ID parameter
+    /** @type {import('./$types').PageData} */
+    export let params;
+    console.log(params);
 </script>
 <main>
     <div class="container">
         <div class="grid-1">
             <div class="col-1">
                 <h1>Book</h1>
-                <img src="images/cheese.jpg" alt="">
+                <img src="{book.cover_image}" alt="">
             </div>
             <div class="col-2">
                 <div class="title">
-                    <h1>It Ends with Us: A Novel</h1>
-                    <img src="images/title_bg.png" alt="">
+                    <h1>{book.title}</h1>
+                    <img src="../images/title_bg.png" alt="">
                 </div>
                 <div class="info">
                     <h2>Authors</h2>
@@ -22,19 +63,33 @@
                     <h2>Status</h2>
                 </div>
                 <div class="detail">
-                    <h2>Collen Hoover</h2>
-                    <h2>2016</h2>
-                    <h2>Atria</h2>
-                    <h2>Literary Fiction</h2>
-                    <h2>English</h2>
-                    <h2>Available</h2>
+                    <h2>{book.author.name}</h2>
+                    <h2>{book.publication.year}</h2>
+                    <h2>{book.publication.publisher.name}</h2>
+                    <h2>
+                        {#each book.categories as category}
+                            {category.name}
+                        {/each}
+                    </h2>
+                    <h2>
+                        {#each book.languages as language}
+                            {language}
+                        {/each}
+                    </h2>
+                    <h2>
+                        {#if book.has_active_borrow_requests}
+                            Not Available
+                        {:else}
+                            Available
+                        {/if}
+                        </h2>
                 </div>
                 <div class="desc">
                     <h2>Description</h2>
-                    <p>Ever the daredevils, they’ve gone to seek adventure in the capital city of Grandin, and Randi can’t help but feel left behind.</p>
+                    <p>{book.description}</p>
                 </div>
                 <div>
-                    {#if available}
+                    {#if !book.has_active_borrow_requests}
                         <button>Borrow</button>
                     {:else}
                         <button class="red">Not Available</button>
@@ -48,7 +103,7 @@
 <style lang="scss">
     main {
         position: relative;
-        padding: 3rem 0;
+        padding: 4rem 0;    
         background-color: #463B33;
 
         .grid-1 {
@@ -129,9 +184,10 @@
         padding: .5rem 1rem;
         font-weight: 600;
         font-size: 1.5rem;
-        cursor: not-allowed;
+        cursor: pointer;
     }
     .red {
+        cursor: not-allowed;
         background-color: rgb(175, 4, 4);
     }
 </style>

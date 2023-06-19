@@ -1,17 +1,6 @@
 /* Write your global styles here, in SCSS syntax. Variables and mixins from the src/variables.scss file are available here without importing */
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@300;400;500;600;700&family=Radley&display=swap');
-@font-face {
-    font-family: 'GlacialIndifference-Regular';
-    src: url('fonts/GlacialIndifference-Regular.otf');
-}
-@font-face {
-    font-family: 'GlacialIndifference-Bold';
-    src: url('fonts/GlacialIndifference-Bold.otf');
-}
-@font-face {
-    font-family: 'Zetafonts-Lovelace';
-    src: url('fonts/Zetafonts - Lovelace Text Bold Italic.otf');
-}
+
 * {
     margin: 0;
     padding: 0;
