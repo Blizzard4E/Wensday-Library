@@ -2,6 +2,7 @@
     import { user } from "../store";
     import { admin } from "../store";
     import SideNav from "./SideNav.svelte";
+    import { goto } from "$app/navigation";
     
     let userInfo;
     user.subscribe(value => {
@@ -13,15 +14,19 @@
         adminInfo = value
     })
 
+    let searchText;
+    function searchPage() {
+        goto('../search/' + searchText)
+    }
 </script>
 <div class="bg">
     <nav class="container">
         <section>
             <a class="library" href="../">Wensday</a>
-            <div class="search">
-                <input type="text" placeholder="Search by books and authors">
+            <form class="search" on:submit|preventDefault={searchPage}>
+                <input bind:value={searchText} type="text" placeholder="Search by books and authors">
                 <img src="/images/search.png" alt="Search Icon">
-            </div>
+            </form>
         </section>
         <section class="right">
             <a href="../">Home</a>

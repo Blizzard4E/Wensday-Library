@@ -39,8 +39,8 @@
     }
     //Book ID parameter
     /** @type {import('./$types').PageData} */
-    export let params;
-    console.log(params);
+    export let data;
+    console.log(data);
 </script>
 <main>
     <div class="container">
@@ -121,6 +121,8 @@
                 img {
                     display: block;
                     width: 300px;
+                    aspect-ratio: 9/12.5;
+                    object-fit: cover;
                 }
             }
             .col-2 {
