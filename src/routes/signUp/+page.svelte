@@ -1,3 +1,6 @@
+<script>
+    let gender = "Other";
+</script>
 <main>
     <div class="container">
         <div class="center">
@@ -27,19 +30,20 @@
                 <div class="row">
                     <div class="center">
                         <h3>Male</h3>
-                        <input type="radio" name="gender">
+                        <input type="radio" name="gender" value="Male" bind:group={gender}>
                     </div>
                     <div class="center">
                         <h3>Female</h3>
-                        <input type="radio" name="gender">
+                        <input type="radio" name="gender" value="Female" bind:group={gender}>
                     </div>
                     <div class="center">
                         <h3>Other</h3>
-                        <input type="radio" name="gender" checked>
+                        <input type="radio" name="gender" checked value="Other" bind:group={gender}>
                     </div>
                 </div>
             </div>
             <div class="center">
+                <a href="../login" class="login">Already have an account?</a>
                 <button>Sign Up</button>
             </div>
         </div>
@@ -47,6 +51,11 @@
 </main>
 
 <style lang="scss">
+    .login {
+        margin-top: 1rem;
+        font-family: 'Poppins',sans-serif;
+        color: white;
+    }
     .row {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;

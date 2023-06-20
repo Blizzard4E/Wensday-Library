@@ -39,7 +39,6 @@
             font-size: 1.5rem;
             line-height: 2.5rem;
             color: white;
-            text-align: center;
         }
         h2 {
             position: absolute;

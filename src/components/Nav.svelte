@@ -3,6 +3,7 @@
     import { admin } from "../store";
     import SideNav from "./SideNav.svelte";
     import { goto } from "$app/navigation";
+    import { onMount } from "svelte";
     
     let userInfo;
     user.subscribe(value => {
@@ -14,9 +15,15 @@
         adminInfo = value
     })
 
+    onMount(() => {
+        if(adminInfo == null && userInfo == null) {
+            goto("/login")
+        }
+    })
+
     let searchText;
     function searchPage() {
-        goto('../search/' + searchText)
+        window.location = '../search?name=' + searchText;
     }
 </script>
 <div class="bg">
@@ -28,20 +35,25 @@
                 <img src="/images/search.png" alt="Search Icon">
             </form>
         </section>
+        {#if userInfo != null || adminInfo != null}
         <section class="right">
-            <a href="../">Home</a>
+            <a href="../../../">Home</a>
             {#if adminInfo != null}
                 <a href="/addBook">Add Book</a>
             {/if}
-            <a href="/profile" class="profile">
-                {#if adminInfo != null}
-                    <h1 class="admin">{adminInfo.username}</h1>
-                {:else}
+            {#if adminInfo == null}
+                <a href="/profile" class="profile">
                     <h1>{userInfo.username}</h1>
-                {/if}
-                <img src="/images/profile_pic.jpg" alt="Profile">
-            </a>
+                    <img src="{userInfo.profile_pic}" alt="Profile">
+                </a>
+            {:else}
+                <div href="/profile" class="profile">
+                    <h1 class="admin">{adminInfo.username}</h1>
+                    <img src="{adminInfo.profile_pic}" alt="Profile">
+                </div>
+            {/if}
         </section>
+        {/if}
     </nav>
 </div>
 

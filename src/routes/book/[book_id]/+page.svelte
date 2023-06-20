@@ -18,6 +18,11 @@
                 category_id: 1,
                 name: "Cooking",
                 add_by_admin_id: 0
+            },
+            {
+                category_id: 1,
+                name: "Cooking",
+                add_by_admin_id: 0
             }
         ],
         add_by_admin_id: 0,
@@ -68,7 +73,7 @@
                     <h2>{book.publication.publisher.name}</h2>
                     <h2>
                         {#each book.categories as category}
-                            {category.name}
+                            <span>{category.name}</span>
                         {/each}
                     </h2>
                     <h2>
@@ -154,6 +159,18 @@
                     grid-area: detail;
                     h2 {
                         font-weight: lighter;
+
+                        span {
+                            &:first-child {
+                                
+                                &::before {
+                                    content: "";
+                                }
+                            }
+                            &::before {
+                                content: ", ";
+                            }
+                        }
                     }
                 }
                 .desc {

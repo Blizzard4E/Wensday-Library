@@ -1,4 +1,12 @@
 <script>
+    import { page } from '$app/stores'
+
+    let categories = [
+        'Fiction',
+        'Story'
+    ]
+
+    $page.url.searchParams.get('ref')
     let showSideNav = false;
 </script>
 
@@ -11,14 +19,14 @@
             <img src="/images/menu_bg.png" alt="">
         </div>
         <div class="menu">
-            <a href="">Books</a>
+            <a href="/search">Books</a>
             <a href="/profile">Profile</a>
             <a>Categories</a>
             <ul>
-                {#each {length: 20} as _, item}
+                {#each categories as category}
                 <li>
                     <div class="pointer"></div>
-                    <h2>Accounting</h2>
+                    <h2><a href="/search?category={category}">{category}</a></h2>
                 </li>
                 {/each}
             </ul>
@@ -54,7 +62,7 @@
     .menu-btn {
         cursor: pointer;
         position: absolute;
-        top: 1rem;
+        top:1rem;
         left: 7vw;
         border: none;
         background: none;

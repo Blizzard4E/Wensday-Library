@@ -1,10 +1,14 @@
 <script>
+    import { onMount } from "svelte";
     import AddAuthor from "../components/AddAuthor.svelte";
-import RowOfBooks from "../components/RowOfBooks.svelte";
+    import AddCategory from "../components/AddCategory.svelte";
+    import AddPublisher from "../components/AddPublisher.svelte";
+    import RowOfBooks from "../components/RowOfBooks.svelte";
     import SideNav from "../components/SideNav.svelte";
     import UserEdit from "../components/UserEdit.svelte";
-    import { admin } from "../store.js"
-    let adminInfo;
+    import { admin, user } from "../store.js"
+    import { goto } from "$app/navigation"
+    let adminInfo
 
 	admin.subscribe(value => {
 		adminInfo = value;
@@ -12,8 +16,12 @@ import RowOfBooks from "../components/RowOfBooks.svelte";
 </script>
 
 {#if adminInfo != null}
-    <UserEdit/>
-    <AddAuthor/>
+    <div class="admin">
+        <UserEdit/>
+        <AddAuthor/>
+        <AddPublisher/>
+        <AddCategory/>
+    </div>
 {:else}
 <SideNav/>
 <section class="hero" style="background: linear-gradient(rgba(41, 23, 23, 0.6),rgba(41, 23, 23, 0.6)), url('images/paragon.jpeg');">
@@ -50,6 +58,10 @@ import RowOfBooks from "../components/RowOfBooks.svelte";
 {/if}
 
 <style lang="scss">
+    .admin {
+        padding: 2rem 0;
+        background-color: #533829;
+    }
     .brown-wrap {
         position: relative;
         z-index: 4;
@@ -85,6 +97,7 @@ import RowOfBooks from "../components/RowOfBooks.svelte";
         img {
             width: 30vw;
             z-index: 1;
+            opacity: .8;
         }
     }
     .hero {

@@ -1,15 +1,15 @@
 <script>
-    let authorName;
+    let publisherName;
 </script>
 <section class="admin">
     <div class="container">
         <div class="author">
             <div>
-                <h1>Create Author</h1>
+                <h1>Create Publisher</h1>
                 <div class="grid">
                     <h2>Name</h2>
                     <div></div> 
-                    <div><input type="text" bind:value={authorName}></div>
+                    <div><input type="text" bind:value={publisherName}></div>
                     <div><button>Create</button></div>
                 </div>
             </div>

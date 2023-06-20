@@ -1,8 +1,11 @@
 <script>
-    import Book from '../../../components/Book.svelte'
-    /** @type {import('./$types').PageData} */
-    export let data;
-    console.log(data);
+    import Book from '../../components/Book.svelte'
+    import { page } from '$app/stores';
+ 
+    const url = $page.url;
+
+    let searchText = url.searchParams.get('name');
+    let queryCategory = url.searchParams.get('category');
 
     let categoryClose = true;
     let categories = [
@@ -10,6 +13,14 @@
         'Story'
     ]
     let pickedCategories = []
+
+    if(searchText == null) {
+        searchText = ""
+    }
+
+    if(queryCategory != "") {
+        pickedCategories.push(queryCategory)
+    }
 
     let authorClose = true;
     let authors = [
@@ -54,7 +65,7 @@
 </script>
 <main>
     <div class="container">
-        <h1>Search results for "<span>{data.searchText}</span>"</h1>
+        <h1>Search results for "<span>{searchText}</span>"</h1>
         <div class="filters">
             <div class="filter">
                 <button on:click={() => {categoryClose = !categoryClose}}>

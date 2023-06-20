@@ -25,12 +25,18 @@
             </div>
         </div>
         <div class="center">
+            <a href="../signUp" class="signUp">Don't have an account?</a>
             <button>Login</button>
         </div>
     </div>
 </main>
 
 <style lang="scss">
+    .signUp {
+        margin-top: 1rem;
+        font-family: 'Poppins',sans-serif;
+        color: white;
+    }
     .row {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -63,7 +69,7 @@
     button {
         cursor: pointer;
         margin: 0;
-        margin-top: 2rem;
+        margin-top: 1rem;
         font-size: 1.1rem;
         background-color:black;
         color: white;

@@ -1,11 +1,31 @@
 <script>
+    let username,balance;
+
+    let users_to_return = [
+        {
+            username: "Guy 1",
+            profile_pic: "../images/profile_pic.jpg",
+            due_date: "23, June 2023",
+            late: 0,
+            book_title: "The Art of Cooking with AI",
+            booK_cover: "https://th.bing.com/th/id/OIG.8cBS8p0rHWtRkPrhEDr6?pid=ImgGn"
+        },
+        {
+            username: "Guy 2",
+            profile_pic: "../images/profile_pic.jpg",
+            due_date: "23, June 2023",
+            late: 3,
+            book_title: "The Art of Cooking with AI",
+            booK_cover: "https://th.bing.com/th/id/OIG.8cBS8p0rHWtRkPrhEDr6?pid=ImgGn"
+        }
+    ]
     
 </script>
 <section class="admin">
     <div class="container">
         <h1>Balance</h1>
         <div class="balance">
-            <h2>Email</h2>
+            <h2>Balance</h2>
             <h2>Add/Charge Balance</h2>
             <div></div>
             <input type="text">
@@ -21,51 +41,33 @@
                 <th>Late</th>
                 <th></th>
             </tr>
+            {#each users_to_return as user}
             <tr>
                 <td>
                     <div class="profile">
-                        <img src="images/profile_pic.jpg" alt="">
-                        <h2>User Name</h2>
+                        <img src="{user.profile_pic}" alt="">
+                        <h2>{user.username}</h2>
                     </div>
                 </td>
                 <td>
                     <div class="book">
-                        <img src="images/cheese.jpg" alt="">
-                        <h2>Book name</h2>
+                        <img src="{user.booK_cover}" alt="">
+                        <h2>{user.book_title}</h2>
                     </div>
                 </td>
-                <td><h2>23, June 2023</h2></td>
-                <td><h2>0 Days</h2></td>
+                <td><h2>{user.due_date}</h2></td>
+                <td><h2>{user.late} Days</h2></td>
                 <td>
                     <button>Return Book</button>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <div class="profile">
-                        <img src="images/profile_pic.jpg" alt="">
-                        <h2>User Name</h2>
-                    </div>
-                </td>
-                <td>
-                    <div class="book">
-                        <img src="images/cheese.jpg" alt="">
-                        <h2>Book name</h2>
-                    </div>
-                </td>
-                <td><h2>23, June 2023</h2></td>
-                <td><h2>0 Days</h2></td>
-                <td>
-                    <button>Return Book</button>
-                </td>
-            </tr>
+            {/each}
         </table>
     </div>
 </section>
 
 <style lang="scss"> 
     .admin {
-        padding: 2rem 0;
         background-color: #533829;
         h1,h2,button {
             font-family: 'Poppins',sans-serif;
@@ -123,8 +125,8 @@
                 display: flex;
                 align-items: center;
                 img {
-                    height: 60px;
-                    aspect-ratio: 9/12.5;
+                    width: 60px;
+                    aspect-ratio: 1/1;
                     object-fit: cover;
                 }
                 h2 {
