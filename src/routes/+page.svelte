@@ -8,11 +8,18 @@
     import UserEdit from "../components/UserEdit.svelte";
     import { admin, user } from "../store.js"
     import { goto } from "$app/navigation"
-    let adminInfo
+    import { browser } from "$app/environment"
+
+    let adminInfo;
+
+    if (browser) {
+        adminInfo = JSON.parse(localStorage.getItem('user_data'));
+    }
 
 	admin.subscribe(value => {
 		adminInfo = value;
 	});
+
 </script>
 
 {#if adminInfo != null}

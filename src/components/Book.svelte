@@ -2,13 +2,13 @@
     export let book;
     let isHover = false;
 </script>
-<a href="/book/{book.book_id}">
+<a href="/book/{book?.book_id}">
     <div class="bg">
-        <h1>{book.title}</h1>
-        <img src="{book.cover_image}" alt="">
+        <h1>{book?.title}</h1>
+        <img src="{book?.cover_image}" alt="">
     </div>
-    <h2>{book.title}</h2>
-    <p>{book.description}</p>
+    <h2>{book?.title}</h2>
+    <p>{book?.description}</p>
 </a>
 
 <style lang="scss">

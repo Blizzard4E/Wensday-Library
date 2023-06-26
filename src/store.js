@@ -1,21 +1,50 @@
+import { browser } from '$app/environment';
+import { onMount } from 'svelte';
 import { writable } from 'svelte/store';
 
-export const admin = writable(
-    // {
-    //     admin_id: 1,
-    //     username: "Thanos",
-    //     password: "library",
-    //     profile_pic: "https://i.pinimg.com/280x280_RS/ec/09/6b/ec096b70b70811fa882422ac610b5fba.jpg",
-    // }
-);
-export const user = writable(
-    {
-        user_id: 1,
-        username: "Barry Allen",
-        password: "Speed",
-        email: "theflasah@gmail.com",
-        profile_pic: "https://pbs.twimg.com/profile_images/557797323569250304/zpGjrYwi_400x400.png",
-        title: "Senior",
-        balance: 300
+export const apiUrl = "http://localhost:3000";
+
+let user_data = null
+let admin_data = null
+
+if (browser) {
+    user_data = localStorage.getItem("user_data") ? JSON.parse(localStorage.getItem("user_data")) : null
+    admin_data = localStorage.getItem("admin_data") ? JSON.parse(localStorage.getItem("admin_data")) : null
+
+     const refreshData = async () => {
+        if (user_data) {
+            const res = await fetch(`${apiUrl}/user/${user_data.user_id}`)
+            const data = await res.json()
+    
+            if (res.status === 200) {
+                user_data = data?.user_data
+                localStorage.setItem("user_data", JSON.stringify(data?.user_data))
+                localStorage.removeItem("admin_data")
+    
+                user.set(user_data)
+            }
+        } else if (admin_data) {
+            const res = await fetch(`${apiUrl}/admin/${admin_data.admin_id}`)
+            const data = await res.json()
+    
+            if (res.status === 200) {
+                admin_data = data?.admin_data
+                localStorage.setItem("admin_data", JSON.stringify(data?.admin_data))
+                localStorage.removeItem("user_data")
+    
+                admin.set(admin_data)
+            }
+        }
     }
+
+    refreshData()
+}
+
+
+export const admin = writable(
+    admin_data
+);
+
+export const user = writable(
+    user_data
 )

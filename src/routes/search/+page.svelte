@@ -1,6 +1,8 @@
 <script>
     import Book from '../../components/Book.svelte'
     import { page } from '$app/stores';
+    import { onMount } from 'svelte';
+    import { apiUrl } from '../../store';
  
     const url = $page.url;
 
@@ -8,10 +10,19 @@
     let queryCategory = url.searchParams.get('category');
 
     let categoryClose = true;
-    let categories = [
-        'Fiction',
-        'Story'
-    ]
+    let categories = [];
+    let book_results = []
+
+    onMount(async () => {
+        const res = await fetch(`${apiUrl}/category/all`);
+        const data = await res.json();
+        categories = [...data.categories]
+
+        const res2 = await fetch(`${apiUrl}/book/all`);
+        const data2 = await res2.json();
+        book_results = [...data2.books]
+    })
+
     let pickedCategories = []
 
     if(searchText == null) {
@@ -36,32 +47,6 @@
     ]
     let pickedLanguages = []
 
-    let book_results = [
-        {
-            book_id: 0,
-            title: "The Art of Cooking with AI",
-            description: "A cookbook that features recipes created by AI using ingredients from different cuisines and cultures. Learn how to make dishes such as spicy chocolate cake,cheeseburger soup, and sushi pizza.",
-            cover_image: "https://th.bing.com/th/id/OIG.8cBS8p0rHWtRkPrhEDr6?pid=ImgGn"
-        },
-        {
-            book_id: 0,
-            title: "The Art of Cooking with AI",
-            description: "A cookbook that features recipes created by AI using ingredients from different cuisines and cultures. Learn how to make dishes such as spicy chocolate cake,cheeseburger soup, and sushi pizza.",
-            cover_image: "https://th.bing.com/th/id/OIG.8cBS8p0rHWtRkPrhEDr6?pid=ImgGn"
-        },
-        {
-            book_id: 0,
-            title: "The Art of Cooking with AI",
-            description: "A cookbook that features recipes created by AI using ingredients from different cuisines and cultures. Learn how to make dishes such as spicy chocolate cake,cheeseburger soup, and sushi pizza.",
-            cover_image: "https://th.bing.com/th/id/OIG.8cBS8p0rHWtRkPrhEDr6?pid=ImgGn"
-        },
-        {
-            book_id: 0,
-            title: "The Art of Cooking with AI",
-            description: "A cookbook that features recipes created by AI using ingredients from different cuisines and cultures. Learn how to make dishes such as spicy chocolate cake,cheeseburger soup, and sushi pizza.",
-            cover_image: "https://th.bing.com/th/id/OIG.8cBS8p0rHWtRkPrhEDr6?pid=ImgGn"
-        }
-    ]
 </script>
 <main>
     <div class="container">
@@ -75,8 +60,8 @@
                 <ul class="dropdown" class:close={categoryClose == true}>
                     {#each categories as category}
                         <li>
-                            <input type="checkbox" bind:group={pickedCategories} name="categories" value={category}>
-                            {category}
+                            <input type="checkbox" bind:group={pickedCategories} name="categories" value={category?.name}>
+                            {category?.name}
                         </li>
                     {/each}
                 </ul>

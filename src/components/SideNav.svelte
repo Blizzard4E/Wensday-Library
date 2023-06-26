@@ -1,13 +1,18 @@
 <script>
     import { page } from '$app/stores'
-
-    let categories = [
-        'Fiction',
-        'Story'
-    ]
+    import { onMount } from "svelte";
+    import { apiUrl } from "../store";
 
     $page.url.searchParams.get('ref')
     let showSideNav = false;
+
+    let categories = [];
+
+    onMount(async () => {
+        const res = await fetch(`${apiUrl}/category/all`);
+        const data = await res.json();
+        categories = [...data.categories]
+    })
 </script>
 
 <nav>
@@ -26,7 +31,7 @@
                 {#each categories as category}
                 <li>
                     <div class="pointer"></div>
-                    <h2><a href="/search?category={category}">{category}</a></h2>
+                    <h2><a href="/search?category={category.name}">{category.name}</a></h2>
                 </li>
                 {/each}
             </ul>

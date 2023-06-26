@@ -1,50 +1,114 @@
 <script>
-    let gender = "Other";
+    import uploadImageToImgur from "../../utils/uploadImageToImgur";
+    import { apiUrl } from "../../store";
+    import { goto } from "$app/navigation";
+
+    let signUpCrendential = {
+        username: null,
+        email: null,
+        password: null,
+        profile_url:
+            "https://pbs.twimg.com/profile_images/557797323569250304/zpGjrYwi_400x400.png",
+        tittle: null,
+        gender: null,
+    };
+
+    function uploadImg(event) {
+        const profile_url = uploadImageToImgur(event);
+
+        if (profile_url) {
+            signUpCrendential.profile_url = profile_url;
+        }
+    }
+
+    async function signUp() {
+        const res = await fetch(`${apiUrl}/user/signup`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(signUpCrendential),
+        });
+
+        const data = await res.json();
+
+        if (res.status == 200) {
+            goto("/login");
+        } else {
+            alert(data.message);
+        }
+    }
 </script>
+
 <main>
     <div class="container">
         <div class="center">
             <h1>Sign Up</h1>
             <div>
                 <h2>Username</h2>
-                <input type="text">
+                <input type="text" bind:value={signUpCrendential.username} />
             </div>
             <div>
                 <h2>Email</h2>
-                <input type="text">
+                <input type="text" bind:value={signUpCrendential.email} />
             </div>
             <div>
                 <h2>Password</h2>
-                <input type="text">
+                <input
+                    type="password"
+                    bind:value={signUpCrendential.password}
+                />
             </div>
             <div>
                 <h2>Profile Image</h2>
-                <input type="file" style="color:white">
+                <input on:change={uploadImg} type="file" style="color:white" />
+                {#if signUpCrendential.profile_url}
+                    <img
+                        src={signUpCrendential.profile_url}
+                        alt="image_upload"
+                    />
+                {/if}
             </div>
             <div>
                 <h2>Title</h2>
-                <input type="text">
+                <input type="text" bind:value={signUpCrendential.tittle} />
             </div>
             <div class="center">
                 <h2>Gender</h2>
                 <div class="row">
                     <div class="center">
                         <h3>Male</h3>
-                        <input type="radio" name="gender" value="Male" bind:group={gender}>
+                        <input
+                            type="radio"
+                            name="gender"
+                            value="Male"
+                            bind:group={signUpCrendential.gender}
+                        />
                     </div>
                     <div class="center">
                         <h3>Female</h3>
-                        <input type="radio" name="gender" value="Female" bind:group={gender}>
+                        <input
+                            type="radio"
+                            name="gender"
+                            value="Female"
+                            bind:group={signUpCrendential.gender}
+                        />
                     </div>
                     <div class="center">
                         <h3>Other</h3>
-                        <input type="radio" name="gender" checked value="Other" bind:group={gender}>
+                        <input
+                            type="radio"
+                            name="gender"
+                            checked
+                            value="Other"
+                            bind:group={signUpCrendential.gender}
+                        />
                     </div>
                 </div>
             </div>
             <div class="center">
                 <a href="../login" class="login">Already have an account?</a>
-                <button>Sign Up</button>
+                <button on:click={signUp}>Sign Up</button>
             </div>
         </div>
     </div>
@@ -53,7 +117,7 @@
 <style lang="scss">
     .login {
         margin-top: 1rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: "Poppins", sans-serif;
         color: white;
     }
     .row {
@@ -75,10 +139,13 @@
     main {
         position: relative;
         padding: 3rem 0;
-        background-color: #463B33;
+        background-color: #463b33;
     }
-    h1,h2,h3,button {
-        font-family: 'Poppins',sans-serif;
+    h1,
+    h2,
+    h3,
+    button {
+        font-family: "Poppins", sans-serif;
         color: white;
         font-weight: 600;
         font-size: 1.5rem;
@@ -90,7 +157,7 @@
         margin: 0;
         margin-top: 2rem;
         font-size: 1.1rem;
-        background-color:black;
+        background-color: black;
         color: white;
         border: none;
         padding: 0.5rem 1rem;
@@ -106,7 +173,7 @@
     }
     input {
         width: 400px;
-        padding: .5rem;
+        padding: 0.5rem;
 
         &:focus {
             outline: none;

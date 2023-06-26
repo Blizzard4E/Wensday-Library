@@ -25,6 +25,15 @@
     function searchPage() {
         window.location = '../search?name=' + searchText;
     }
+
+    function logout() {
+        localStorage.removeItem('user_data');
+        localStorage.removeItem('admin_data');
+        user.set(null);
+        admin.set(null);
+        goto("/login")
+    }
+
 </script>
 <div class="bg">
     <nav class="container">
@@ -44,13 +53,15 @@
             {#if adminInfo == null}
                 <a href="/profile" class="profile">
                     <h1>{userInfo.username}</h1>
-                    <img src="{userInfo.profile_pic}" alt="Profile">
+                    <img src="{userInfo.profile_url}" alt="Profile">
                 </a>
+                <button on:click={logout}>Logout</button>
             {:else}
                 <div href="/profile" class="profile">
                     <h1 class="admin">{adminInfo.username}</h1>
-                    <img src="{adminInfo.profile_pic}" alt="Profile">
+                    <img src="https://pbs.twimg.com/profile_images/557797323569250304/zpGjrYwi_400x400.png" alt="Profile">
                 </div>
+                <button on:click={logout}>Logout</button>
             {/if}
         </section>
         {/if}

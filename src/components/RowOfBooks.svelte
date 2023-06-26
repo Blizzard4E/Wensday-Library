@@ -1,6 +1,8 @@
 <script>
     import Book from "./Book.svelte";
     import fakeData from '../FakeAPIData/books.json'
+    import { onMount } from "svelte";
+    import { apiUrl } from "../store";
     let currentPos = 0;
     let offset = 35.5;
     let books = [];
@@ -13,7 +15,13 @@
         currentPos += offset;
         console.log(currentPos)
     }
-    books = fakeData;
+    // books = fakeData;
+
+    onMount(async () => {
+        const res = await fetch(`${apiUrl}/book/all`);
+        const data = await res.json();
+        books = [...data.books]
+    })
 </script>
 <div class="carousel">
     <button class="arrow-left" on:click={() => prevSlide()} class:hide={currentPos == 0}>
