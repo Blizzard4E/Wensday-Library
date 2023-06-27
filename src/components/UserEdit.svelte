@@ -1,86 +1,135 @@
 <script>
-    let username,balance;
+    import { onMount } from "svelte";
+    import { apiUrl } from "../store";
+    import { isoToStringDate, getLateDays } from "../utils/DateHelper";
+    import { admin } from "../store";
 
-    let users_to_return = [
-        {
-            username: "Guy 1",
-            profile_pic: "../images/profile_pic.jpg",
-            due_date: "23, June 2023",
-            late: 0,
-            book_title: "The Art of Cooking with AI",
-            booK_cover: "https://th.bing.com/th/id/OIG.8cBS8p0rHWtRkPrhEDr6?pid=ImgGn"
-        },
-        {
-            username: "Guy 2",
-            profile_pic: "../images/profile_pic.jpg",
-            due_date: "23, June 2023",
-            late: 3,
-            book_title: "The Art of Cooking with AI",
-            booK_cover: "https://th.bing.com/th/id/OIG.8cBS8p0rHWtRkPrhEDr6?pid=ImgGn"
+    let admin_info;
+
+    admin.subscribe((value) => {
+        admin_info = value;
+    });
+
+    let balanceUpdate = {
+        user_id: null,
+        amount: null,
+        admin_id: admin_info.admin_id,
+    };
+
+    let users_to_return = [];
+
+    onMount(async () => {
+        const res = await fetch(`${apiUrl}/activeBorrows`);
+        const data = await res.json();
+        users_to_return = [...data.active_borrows];
+    });
+
+    async function updateBalance() {
+        const res = await fetch(`${apiUrl}/updateBalance`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(balanceUpdate),
+        });
+        const data = await res.json();
+
+        if (res.status === 200) {
+            alert("Balance Updated");
+
+            balanceUpdate = {
+                user_id: null,
+                amount: null,
+                admin_id: admin_info.admin_id,
+            };
+        } else {
+            alert(data.message);
         }
-    ]
-    
+    }
 </script>
+
 <section class="admin">
     <div class="container">
         <h1>Balance</h1>
         <div class="balance">
-            <h2>Balance</h2>
+            <h2>User ID</h2>
             <h2>Add/Charge Balance</h2>
-            <div></div>
-            <input type="text">
-            <input type="number">
-            <div><button>Submit</button></div>
+            <div />
+            <input type="text" on:change={() => {console.log(balanceUpdate.user_id)}} bind:value={balanceUpdate.user_id} />
+            <input type="number" bind:value={balanceUpdate.amount} />
+            <div><button on:click={updateBalance}>Submit</button></div>
         </div>
         <h1 style="margin-top: 2rem;">Users to return books</h1>
         <table>
             <tr>
                 <th>User</th>
                 <th>Book</th>
-                <th>Due Date</th>
+                <th>Borrow Date</th>
+                <th>To Return Date</th>
                 <th>Late</th>
-                <th></th>
+                <th />
             </tr>
-            {#each users_to_return as user}
-            <tr>
-                <td>
-                    <div class="profile">
-                        <img src="{user.profile_pic}" alt="">
-                        <h2>{user.username}</h2>
-                    </div>
-                </td>
-                <td>
-                    <div class="book">
-                        <img src="{user.booK_cover}" alt="">
-                        <h2>{user.book_title}</h2>
-                    </div>
-                </td>
-                <td><h2>{user.due_date}</h2></td>
-                <td><h2>{user.late} Days</h2></td>
-                <td>
-                    <button>Return Book</button>
-                </td>
-            </tr>
+            {#each users_to_return as active_borrow}
+                <tr>
+                    <td>
+                        <div class="profile">
+                            <img
+                                src={active_borrow?.user?.profile_url}
+                                alt="profile"
+                            />
+                            <h2>{active_borrow?.user?.username}</h2>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="book">
+                            <img
+                                src={active_borrow?.book?.cover_image}
+                                alt="cover"
+                            />
+                            <h2>{active_borrow?.book?.title}</h2>
+                        </div>
+                    </td>
+                    <td
+                        ><h2>
+                            {isoToStringDate(active_borrow?.borrow_date)}
+                        </h2></td
+                    >
+                    <td
+                        ><h2>
+                            {isoToStringDate(active_borrow?.date_to_be_return)}
+                        </h2></td
+                    >
+                    <td
+                        ><h2>
+                            {getLateDays(active_borrow?.date_to_be_return)} Days
+                        </h2></td
+                    >
+                    <td>
+                        <button>Return Book</button>
+                    </td>
+                </tr>
             {/each}
         </table>
     </div>
 </section>
 
-<style lang="scss"> 
+<style lang="scss">
     .admin {
         background-color: #533829;
-        h1,h2,button {
-            font-family: 'Poppins',sans-serif;
+        h1,
+        h2,
+        button {
+            font-family: "Poppins", sans-serif;
             color: white;
             font-weight: 600;
             font-size: 1.5rem;
             text-transform: uppercase;
         }
-        button { 
+        button {
             cursor: pointer;
             margin: 0;
             font-size: 1.1rem;
-            background-color:black;
+            background-color: black;
             color: white;
             border: none;
             padding: 0.5rem 1rem;
@@ -90,23 +139,23 @@
         }
         input {
             width: 400px;
-            padding: .5rem;
+            padding: 0.5rem;
 
             &:focus {
                 outline: none;
             }
         }
         table {
-            font-family: 'Poppins',sans-serif;
+            font-family: "Poppins", sans-serif;
             width: 100%;
 
             th {
-                color: white;   
+                color: white;
                 font-size: 1.3rem;
                 font-weight: 500;
             }
             td {
-                padding: .5rem 0;
+                padding: 0.5rem 0;
             }
             .profile {
                 display: flex;

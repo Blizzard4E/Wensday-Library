@@ -1,5 +1,37 @@
 <script>
+    import { admin } from "../store";
+    import { apiUrl } from "../store";
+
+    let admin_info
+
+    admin.subscribe(value => {
+        admin_info = value
+    })
+
     let categoryName;
+
+    async function createCategory() {
+        const res = await fetch(`${apiUrl}/createCategory`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({
+                category_name: categoryName,
+                add_by_admin_id: admin_info.admin_id
+            })
+        })
+
+        const data = await res.json()
+
+        if (res.status == 200) {
+            alert(data.message)
+
+            categoryName = null
+        } else {
+            alert(data.message)
+        }
+    }
 </script>
 <section class="admin">
     <div class="container">
@@ -10,7 +42,7 @@
                     <h2>Name</h2>
                     <div></div> 
                     <div><input type="text" bind:value={categoryName}></div>
-                    <div><button>Create</button></div>
+                    <div><button on:click={createCategory}>Create</button></div>
                 </div>
             </div>
 

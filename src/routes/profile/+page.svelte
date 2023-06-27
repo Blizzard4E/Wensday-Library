@@ -9,47 +9,6 @@
         user_info = value;
     });
 
-    // let user = {
-    //     user_id: 0,
-    //     title: "Sophomore",
-    //     username: "Nate River",
-    //     gender: "Male",
-    //     email: "long@paragoniu.edu.kh"
-    // }
-    // let active_borrow = [
-    //     {
-    //         book_id: 0,
-    //         title: "The Art of Cooking with AI",
-    //         description: "A cookbook that features recipes created by AI using ingredients from different cuisines and cultures. Learn how to make dishes such as spicy chocolate cake,cheeseburger soup, and sushi pizza.",
-    //         cover_image: "https://th.bing.com/th/id/OIG.8cBS8p0rHWtRkPrhEDr6?pid=ImgGn"
-    //     }
-    // ]
-    // let borrow_history = [
-    //     {
-    //         book_id: 0,
-    //         title: "The Art of Cooking with AI",
-    //         description: "A cookbook that features recipes created by AI using ingredients from different cuisines and cultures. Learn how to make dishes such as spicy chocolate cake,cheeseburger soup, and sushi pizza.",
-    //         cover_image: "https://th.bing.com/th/id/OIG.8cBS8p0rHWtRkPrhEDr6?pid=ImgGn"
-    //     },
-    //     {
-    //         book_id: 3,
-    //         title: "The Lost Planet",
-    //         description: "A sci-fi novel that follows the adventures of a group of explorers who crash-land on a mysterious planet that seems to be alive and hostile. They must find a way to survive and escape before they are consumed by the planet’s secrets.",
-    //         cover_image: "https://th.bing.com/th/id/OIG.jWQJLaGTm8_FXG_9i7KR?pid=ImgGn"
-    //     }
-    // ]
-    // let balance_histories = [
-    //     {
-    //         date: "03, June 2023 11:30 AM",
-    //         amount: 100,
-    //         admin_name: "Thanos"
-    //     },
-    //     {
-    //         date: "03, June 2023 11:30 AM",
-    //         amount: -100,
-    //         admin_name: "Thanos"
-    //     }
-    // ]
     function setTab(index) {
         tab = index;
     }
@@ -59,7 +18,7 @@
     <section class="title container">
         <h1>PErsonal Information</h1>
         <div class="profile-pic">
-            <img src="images/profile_pic.jpg" alt="" />
+            <img src="{user_info?.profile_url}" alt="" />
         </div>
         <h1>PErsonal Account</h1>
     </section>

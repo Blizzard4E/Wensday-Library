@@ -15,7 +15,7 @@ async function uploadImageToImgur(event) {
 
         const data = await res.json();
         console.log(data)
-        if (data.success) {
+        if (res.status == 200) {
             return data.data.link;
         }
     } catch (error) {

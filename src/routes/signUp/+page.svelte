@@ -7,14 +7,14 @@
         username: null,
         email: null,
         password: null,
-        profile_url:
-            "https://pbs.twimg.com/profile_images/557797323569250304/zpGjrYwi_400x400.png",
+        profile_url:'',
+            // "https://pbs.twimg.com/profile_images/557797323569250304/zpGjrYwi_400x400.png",
         tittle: null,
         gender: null,
     };
 
-    function uploadImg(event) {
-        const profile_url = uploadImageToImgur(event);
+    async function uploadImg(event) {
+        const profile_url = await uploadImageToImgur(event);
 
         if (profile_url) {
             signUpCrendential.profile_url = profile_url;
@@ -65,7 +65,7 @@
                 {#if signUpCrendential.profile_url}
                     <img
                         src={signUpCrendential.profile_url}
-                        alt="image_upload"
+                        alt="image_upload" width="128px" height="128px"
                     />
                 {/if}
             </div>
