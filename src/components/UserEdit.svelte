@@ -46,6 +46,24 @@
             alert(data.message);
         }
     }
+
+    async function updateReturnBook(active_borrow_id) {
+        const res = await fetch(
+            `${apiUrl}/updateActiveBorrow/${active_borrow_id}`,
+            {
+                method: "POST",
+            }
+        );
+        const data = await res.json();
+
+        if (res.status == 200) {
+            const res2 = await fetch(`${apiUrl}/activeBorrows`);
+            const data2 = await res2.json();
+            users_to_return = [...data2.active_borrows];
+        }
+
+        alert(data.message);
+    }
 </script>
 
 <section class="admin">
@@ -55,61 +73,77 @@
             <h2>User ID</h2>
             <h2>Add/Charge Balance</h2>
             <div />
-            <input type="text" on:change={() => {console.log(balanceUpdate.user_id)}} bind:value={balanceUpdate.user_id} />
+            <input
+                type="text"
+                on:change={() => {
+                    console.log(balanceUpdate.user_id);
+                }}
+                bind:value={balanceUpdate.user_id}
+            />
             <input type="number" bind:value={balanceUpdate.amount} />
             <div><button on:click={updateBalance}>Submit</button></div>
         </div>
         <h1 style="margin-top: 2rem;">Users to return books</h1>
-        <table>
-            <tr>
-                <th>User</th>
-                <th>Book</th>
-                <th>Borrow Date</th>
-                <th>To Return Date</th>
-                <th>Late</th>
-                <th />
-            </tr>
-            {#each users_to_return as active_borrow}
+        {#if users_to_return.length > 0}
+            <table>
                 <tr>
-                    <td>
-                        <div class="profile">
-                            <img
-                                src={active_borrow?.user?.profile_url}
-                                alt="profile"
-                            />
-                            <h2>{active_borrow?.user?.username}</h2>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="book">
-                            <img
-                                src={active_borrow?.book?.cover_image}
-                                alt="cover"
-                            />
-                            <h2>{active_borrow?.book?.title}</h2>
-                        </div>
-                    </td>
-                    <td
-                        ><h2>
-                            {isoToStringDate(active_borrow?.borrow_date)}
-                        </h2></td
-                    >
-                    <td
-                        ><h2>
-                            {isoToStringDate(active_borrow?.date_to_be_return)}
-                        </h2></td
-                    >
-                    <td
-                        ><h2>
-                            {getLateDays(active_borrow?.date_to_be_return)} Days
-                        </h2></td
-                    >
-                    <td>
-                        <button>Return Book</button>
-                    </td>
+                    <th>User</th>
+                    <th>Book</th>
+                    <th>Borrow Date</th>
+                    <th>To Return Date</th>
+                    <th>Day left to be return</th>
+                    <th />
                 </tr>
-            {/each}
-        </table>
+                {#each users_to_return as active_borrow}
+                    <tr>
+                        <td>
+                            <div class="profile">
+                                <img
+                                    src={active_borrow?.user?.profile_url}
+                                    alt="profile"
+                                />
+                                <h2>{active_borrow?.user?.username}</h2>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="book">
+                                <img
+                                    src={active_borrow?.book?.cover_image}
+                                    alt="cover"
+                                />
+                                <h2>{active_borrow?.book?.title}</h2>
+                            </div>
+                        </td>
+                        <td
+                            ><h2>
+                                {isoToStringDate(active_borrow?.borrow_date)}
+                            </h2></td
+                        >
+                        <td
+                            ><h2>
+                                {isoToStringDate(
+                                    active_borrow?.date_to_be_return
+                                )}
+                            </h2></td
+                        >
+                        <td
+                            ><h2>
+                                {getLateDays(active_borrow?.date_to_be_return)} Days
+                            </h2></td
+                        >
+                        <td>
+                            <button
+                                on:click={updateReturnBook(
+                                    active_borrow?.active_borrow_id
+                                )}>Return Book</button
+                            >
+                        </td>
+                    </tr>
+                {/each}
+            </table>
+        {:else}
+            <h2>No Users to return books</h2>
+        {/if}
     </div>
 </section>
 

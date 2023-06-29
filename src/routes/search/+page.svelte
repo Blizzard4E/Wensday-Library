@@ -3,6 +3,7 @@
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
     import { apiUrl } from '../../store';
+    import { languages } from '../../FakeAPIData/languages';
  
     const url = $page.url;
 
@@ -20,6 +21,7 @@
 
         const res2 = await fetch(`${apiUrl}/book/all`);
         const data2 = await res2.json();
+        console.log(data2.books)
         book_results = [...data2.books]
     })
 
@@ -41,10 +43,6 @@
     let pickedAuthors = []
 
     let languageClose = true;
-    let languages = [
-        'English',
-        'French'
-    ]
     let pickedLanguages = []
 
 </script>

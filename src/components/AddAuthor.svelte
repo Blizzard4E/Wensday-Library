@@ -25,12 +25,10 @@
         const data = await res.json()
 
         if (res.status == 200) {
-            alert(data.message)
-
             authorName = null
-        } else {
-            alert(data.message)
         }
+
+        alert(data.message)
     }
 </script>
 <section class="admin">

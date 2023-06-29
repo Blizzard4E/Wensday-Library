@@ -25,12 +25,11 @@
         const data = await res.json()
 
         if (res.status == 200) {
-            alert(data.message)
 
             categoryName = null
-        } else {
-            alert(data.message)
         }
+
+        alert(data.message)
     }
 </script>
 <section class="admin">

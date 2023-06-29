@@ -1,6 +1,43 @@
 <script>
-    let publisherName;
+    import { admin } from "../store";
+    import { apiUrl } from "../store";
+
+    let admin_info;
+
+    admin.subscribe((value) => {
+        admin_info = value;
+    });
+
+    let publisher = {
+        name: null,
+        city: null,
+        admin_id: admin_info.admin_id,
+    };
+
+    async function createPublisher() {
+        const res = await fetch(`${apiUrl}/createPublisher`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(publisher),
+        });
+
+        const data = await res.json();
+
+        if (res.status == 200) {
+
+            publisher = {
+                name: null,
+                city: null,
+                admin_id: admin_info.admin_id,
+            };
+        } 
+        
+        alert(data.message);
+    }
 </script>
+
 <section class="admin">
     <div class="container">
         <div class="author">
@@ -8,15 +45,19 @@
                 <h1>Create Publisher</h1>
                 <div class="grid">
                     <h2>Name</h2>
-                    <div></div> 
-                    <div><input type="text" bind:value={publisherName}></div>
-                    <div><button>Create</button></div>
+                    <div />
+                    <div><input type="text" bind:value={publisher.name} /></div>
+                    <div />
+                    <h2>City</h2>
+                    <div />
+                    <div><input type="text" bind:value={publisher.city} /></div>
+                    <div><button on:click={createPublisher}>Create</button></div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
+
 <style lang="scss">
     .author {
         display: grid;
@@ -32,18 +73,20 @@
     .admin {
         padding-top: 2rem;
         background-color: #533829;
-        h1,h2,button {
-            font-family: 'Poppins',sans-serif;
+        h1,
+        h2,
+        button {
+            font-family: "Poppins", sans-serif;
             color: white;
             font-weight: 600;
             font-size: 1.5rem;
             text-transform: uppercase;
         }
-        button { 
+        button {
             cursor: pointer;
             margin: 0;
             font-size: 1.1rem;
-            background-color:black;
+            background-color: black;
             color: white;
             border: none;
             padding: 0.5rem 1rem;
@@ -53,7 +96,7 @@
         }
         input {
             width: 400px;
-            padding: .5rem;
+            padding: 0.5rem;
 
             &:focus {
                 outline: none;

@@ -1,20 +1,47 @@
 <script>
     import { onMount } from "svelte";
     import { apiUrl } from "../../../store";
+    import { user } from "../../../store";
 
     /** @type {import('./$types').PageData} */
     //Book ID parameter
     export let data;
 
-    let book 
+    let user_info;
+
+    user.subscribe((value) => {
+        user_info = value;
+    });
+
+    let book;
 
     onMount(async () => {
         const res = await fetch(`${apiUrl}/book/${data.book_id}`);
         const resJson = await res.json();
-        book = {...resJson.book}
+        book = { ...resJson.book };
 
         // console.log(book)
     });
+
+    async function borrowBook(book_id) {
+        const res = await fetch(`${apiUrl}/borrowBook/${book_id}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ book_id, user_id: user_info.user_id }),
+        });
+
+        const data = await res.json();
+
+        if (res.status == 200) {
+            const res2 = await fetch(`${apiUrl}/book/${book_id}`);
+            const resJson = await res2.json();
+            book = { ...resJson.book };
+        }
+
+        alert(data.message);
+    }
 </script>
 
 <main>
@@ -41,7 +68,7 @@
                     <h2>
                         {book?.author?.name}
                     </h2>
-                    <h2>{book?.publication?.year}</h2>
+                    <h2>{book?.publication?.publish_year}</h2>
                     <h2>{book?.publication?.publisher?.name}</h2>
                     <h2>{book?.category.name}</h2>
                     <h2>{book?.language}</h2>
@@ -59,7 +86,7 @@
                 </div>
                 <div>
                     {#if !book?.has_active_borrow_requests}
-                        <button>Borrow</button>
+                        <button on:click={borrowBook(book?.book_id)}>Borrow</button>
                     {:else}
                         <button class="red">Not Available</button>
                     {/if}
