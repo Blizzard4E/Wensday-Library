@@ -23,6 +23,9 @@
 
     let searchText;
     function searchPage() {
+        if (searchText == null) {
+            searchText = "";
+        }
         window.location = '../search?name=' + searchText;
     }
 

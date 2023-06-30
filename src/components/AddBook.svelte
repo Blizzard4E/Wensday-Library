@@ -72,10 +72,31 @@
         const data = await res.json();
 
         if (res.status == 200) {
-            alert(data.message)
-        } 
-        
-        alert(data.message)
+            bookDetail = {
+                book: {
+                    title: null,
+                    description: null,
+                    cover_image: null,
+                    language: null,
+                    author_id: null,
+                    has_active_borrow_requests: false,
+                    user_borrow_count: 0,
+                    category_id: null,
+                    add_by_admin_id: admin_info?.admin_id,
+                },
+                publication: {
+                    publish_year: null,
+                    series_title: null,
+                    volume: null,
+                    edition: null,
+                    number_of_volumes: null,
+                    number_of_pages: null,
+                    publisher_id: null,
+                },
+            };
+        }
+
+        alert(data.message);
     }
 </script>
 
@@ -85,11 +106,11 @@
             <h1>Book</h1>
             <div>
                 <h2>Title</h2>
-                <input type="text" bind:value={bookDetail.book.title}/>
+                <input type="text" bind:value={bookDetail.book.title} />
             </div>
             <div>
                 <h2>Description</h2>
-                <input type="text" bind:value={bookDetail.book.description}/>
+                <input type="text" bind:value={bookDetail.book.description} />
             </div>
             <div>
                 <h2>Cover Image</h2>
@@ -141,27 +162,42 @@
             </div>
             <div>
                 <h2>Publish Year</h2>
-                <input type="text" bind:value={bookDetail.publication.publish_year} />
+                <input
+                    type="text"
+                    bind:value={bookDetail.publication.publish_year}
+                />
             </div>
             <div>
                 <h2>Series Title</h2>
-                <input type="text" bind:value={bookDetail.publication.series_title}/>
+                <input
+                    type="text"
+                    bind:value={bookDetail.publication.series_title}
+                />
             </div>
             <div>
                 <h2>Volume</h2>
-                <input type="text" bind:value={bookDetail.publication.volume}/>
+                <input type="text" bind:value={bookDetail.publication.volume} />
             </div>
             <div>
                 <h2>Edition</h2>
-                <input type="text" bind:value={bookDetail.publication.edition}/>
+                <input
+                    type="text"
+                    bind:value={bookDetail.publication.edition}
+                />
             </div>
             <div>
                 <h2>Number of Volume</h2>
-                <input type="text" bind:value={bookDetail.publication.number_of_volumes}/>
+                <input
+                    type="text"
+                    bind:value={bookDetail.publication.number_of_volumes}
+                />
             </div>
             <div>
                 <h2>Number of Pages</h2>
-                <input type="text" bind:value={bookDetail.publication.number_of_pages}/>
+                <input
+                    type="text"
+                    bind:value={bookDetail.publication.number_of_pages}
+                />
             </div>
             <div class="authors">
                 <h2>Author</h2>
@@ -195,7 +231,11 @@
                     {/each}
                 </ul>
             </div>
-            <div><button style="margin-top: 1rem;" on:click={addBook}>Submit</button></div>
+            <div>
+                <button style="margin-top: 1rem;" on:click={addBook}
+                    >Submit</button
+                >
+            </div>
         </div>
     </div>
 </section>
