@@ -128,7 +128,7 @@
                         >
                         <td
                             ><h2>
-                                {getLateDays(active_borrow?.date_to_be_return)} Days
+                                {- getLateDays(active_borrow?.date_to_be_return)} Days
                             </h2></td
                         >
                         <td>

@@ -1,7 +1,6 @@
 <script>
     import { onMount } from "svelte";
     import { apiUrl } from "../store";
-    import { languages } from "../FakeAPIData/languages";
     import { admin } from "../store";
     import uploadImageToImgur from "../utils/uploadImageToImgur";
 
@@ -14,6 +13,7 @@
     let categories = [];
     let authors = [];
     let publishers = [];
+    let languages = [];
 
     onMount(async () => {
         const res = await fetch(`${apiUrl}/category/all`);
@@ -27,6 +27,10 @@
         const res3 = await fetch(`${apiUrl}/publisher/all`);
         const data3 = await res3.json();
         publishers = [...data3.publishers];
+
+        const res4 = await fetch(`${apiUrl}/language/all`);
+        const data4 = await res4.json();
+        languages = [...data4.languages];
     });
 
     let bookDetail = {
@@ -34,7 +38,7 @@
             title: null,
             description: null,
             cover_image: null,
-            language: null,
+            language_id: null,
             author_id: null,
             has_active_borrow_requests: false,
             user_borrow_count: 0,
@@ -77,7 +81,7 @@
                     title: null,
                     description: null,
                     cover_image: null,
-                    language: null,
+                    language_id: null,
                     author_id: null,
                     has_active_borrow_requests: false,
                     user_borrow_count: 0,
@@ -135,11 +139,11 @@
                         <li>
                             <input
                                 type="radio"
-                                bind:group={bookDetail.book.language}
+                                bind:group={bookDetail.book.language_id}
                                 name="languages"
-                                value={language}
+                                value={language.language_id}
                             />
-                            {language}
+                            {language.language}
                         </li>
                     {/each}
                 </ul>

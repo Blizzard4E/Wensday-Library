@@ -3,6 +3,7 @@
     import AddAuthor from "../components/AddAuthor.svelte";
     import AddCategory from "../components/AddCategory.svelte";
     import AddPublisher from "../components/AddPublisher.svelte";
+    import AddLanguage from "../components/AddLanguage.svelte";
     import RowOfBooks from "../components/RowOfBooks.svelte";
     import SideNav from "../components/SideNav.svelte";
     import UserEdit from "../components/UserEdit.svelte";
@@ -28,6 +29,7 @@
         <AddAuthor/>
         <AddPublisher/>
         <AddCategory/>
+        <AddLanguage/>
     </div>
 {:else}
 <SideNav/>

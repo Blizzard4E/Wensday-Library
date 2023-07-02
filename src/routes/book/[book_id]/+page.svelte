@@ -71,7 +71,7 @@
                     <h2>{book?.publication?.publish_year}</h2>
                     <h2>{book?.publication?.publisher?.name}</h2>
                     <h2>{book?.category.name}</h2>
-                    <h2>{book?.language}</h2>
+                    <h2>{book?.language?.language}</h2>
                     <h2>
                         {#if book?.has_active_borrow_requests}
                             Not Available

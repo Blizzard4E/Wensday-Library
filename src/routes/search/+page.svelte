@@ -3,16 +3,16 @@
     import { page } from "$app/stores";
     import { onMount } from "svelte";
     import { apiUrl } from "../../store";
-    import { languages } from "../../FakeAPIData/languages";
-
     const url = $page.url;
 
     let searchText = url.searchParams.get("name") ?? "";
+    let clickOneCategory = url.searchParams.get("category") ?? "";
 
     let categoryClose = true;
     let categories = [];
     let book_results = [];
     let authors = [];
+    let languages = [];
 
     let pickedCategories = [];
 
@@ -40,6 +40,21 @@
         const data3 = await res3.json();
         authors = [...data3.authors];
 
+        const res4 = await fetch(`${apiUrl}/language/all`);
+        const data4 = await res4.json();
+        languages = [...data4.languages];
+
+        if (clickOneCategory != "") {
+            pickedCategories.push(clickOneCategory);
+
+            const checkboxOfCategoryName = document.getElementById(clickOneCategory);
+            checkboxOfCategoryName.checked = true;
+
+            sortBooks();
+
+            return;
+        }
+
         if (searchText != "") {
             sortBooks();
         }
@@ -54,21 +69,21 @@
         if (pickedCategories.length > 0) {
             // console.log(pickedCategories);
             newBooks = newBooks.filter((book) => {
-                return pickedCategories.includes(book?.category.name);
+                return pickedCategories.includes(book?.category?.name);
             });
         }
 
         if (pickedAuthors.length > 0) {
             // console.log(pickedAuthors);
             newBooks = newBooks.filter((book) => {
-                return pickedAuthors.includes(book?.author.name);
+                return pickedAuthors.includes(book?.author?.name);
             });
         }
 
         if (pickedLanguages.length > 0) {
             // console.log(pickedLanguages);
             newBooks = newBooks.filter((book) => {
-                return pickedLanguages.includes(book?.language);
+                return pickedLanguages.includes(book?.language?.language);
             });
         }
 
@@ -113,7 +128,9 @@
                                 id={category?.name}
                                 on:change={sortBooks}
                             />
-                            <label for={category?.name}>{category?.name}</label>
+                            <label for={category?.name}>
+                                {category?.name}
+                            </label>
                         </li>
                     {/each}
                 </ul>
@@ -167,11 +184,13 @@
                                 type="checkbox"
                                 bind:group={pickedLanguages}
                                 name="languages"
-                                value={language}
-                                id={language}
+                                value={language.language}
+                                id={language.language}
                                 on:change={sortBooks}
                             />
-                            <label for={language}>{language}</label>
+                            <label for={language.language}
+                                >{language.language}</label
+                            >
                         </li>
                     {/each}
                 </ul>
@@ -223,7 +242,9 @@
         background-color: white;
         transition: 0.25s ease-in-out;
         margin-bottom: 1rem;
-        overflow: hidden;
+        /* overflow: hidden; */
+        /* Seakmeng Change overflow */
+        overflow-y: scroll;
 
         li {
             input {

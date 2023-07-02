@@ -86,10 +86,10 @@
     }
     ul {
         margin-top: 2rem;
-        overflow: scroll;
         margin-left: 2.5rem;
         min-height: 20rem;
         max-height: 20rem;
+        overflow-y: scroll;
         li {
             margin-top: 1rem;
             display: flex;
