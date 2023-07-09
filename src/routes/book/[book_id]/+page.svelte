@@ -16,11 +16,11 @@
     let book;
 
     onMount(async () => {
-        const res = await fetch(`${apiUrl}/book/${data.book_id}`);
+        const res = await fetch(`${apiUrl}/book/detail/${data.book_id}`);
         const resJson = await res.json();
         book = { ...resJson.book };
 
-        // console.log(book)
+        console.log(book)
     });
 
     async function borrowBook(book_id) {
@@ -66,12 +66,12 @@
                 </div>
                 <div class="detail">
                     <h2>
-                        {book?.author?.name}
+                        {book?.author_name}
                     </h2>
-                    <h2>{book?.publication?.publish_year}</h2>
-                    <h2>{book?.publication?.publisher?.name}</h2>
-                    <h2>{book?.category.name}</h2>
-                    <h2>{book?.language?.language}</h2>
+                    <h2>{book?.publish_year}</h2>
+                    <h2>{book?.publisher_name}</h2>
+                    <h2>{book?.category_name}</h2>
+                    <h2>{book?.language}</h2>
                     <h2>
                         {#if book?.has_active_borrow_requests}
                             Not Available
