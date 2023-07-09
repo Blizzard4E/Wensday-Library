@@ -44,6 +44,14 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="container">
+                <div class="grid">
+                    <h2>Balance: ${user_info?.balance}</h2>
+                    <h2>Debt: ${user_info?.debt}</h2>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="selection container">
         <button class:active={tab == 0} on:click={() => setTab(0)}
