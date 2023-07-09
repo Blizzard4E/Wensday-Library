@@ -1,9 +1,9 @@
 <script>
-    import { page } from '$app/stores'
+    import { page } from "$app/stores";
     import { onMount } from "svelte";
     import { apiUrl } from "../store";
 
-    $page.url.searchParams.get('ref')
+    $page.url.searchParams.get("ref");
     let showSideNav = false;
 
     let categories = [];
@@ -11,17 +11,21 @@
     onMount(async () => {
         const res = await fetch(`${apiUrl}/category/all`);
         const data = await res.json();
-        categories = [...data.categories]
-    })
+        categories = [...data.categories];
+    });
 </script>
 
 <nav>
-    <button class="menu-btn" on:click={() => showSideNav = !showSideNav }>
-        <img src="/images/menu_btn.png" alt="">
+    <button class="menu-btn" on:click={() => (showSideNav = !showSideNav)}>
+        <img src="/images/menu_btn.png" alt="" />
     </button>
-    <div class="black-paint" class:fadeIn={showSideNav} class:fadeOut={!showSideNav}>
+    <div
+        class="black-paint"
+        class:fadeIn={showSideNav}
+        class:fadeOut={!showSideNav}
+    >
         <div class="bg">
-            <img src="/images/menu_bg.png" alt="">
+            <img src="/images/menu_bg.png" alt="" />
         </div>
         <div class="menu">
             <a href="/search">Books</a>
@@ -29,14 +33,18 @@
             <a>Categories</a>
             <ul>
                 {#each categories as category}
-                <li>
-                    <div class="pointer"></div>
-                    <h2><a href="/search?category={category.name}">{category.name}</a></h2>
-                </li>
+                    <li>
+                        <div class="pointer" />
+                        <h2>
+                            <a href="/search?category={category.name}"
+                                >{category.name}</a
+                            >
+                        </h2>
+                    </li>
                 {/each}
             </ul>
         </div>
-        <div class="black-gradient"></div>
+        <div class="black-gradient" />
     </div>
 </nav>
 
@@ -58,7 +66,12 @@
         position: absolute;
         bottom: -5rem;
         left: -8rem;
-        background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, .4), rgba(0, 0, 0, .8), rgba(0, 0, 0, 1));
+        background: linear-gradient(
+            rgba(0, 0, 0, 0.05),
+            rgba(0, 0, 0, 0.4),
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 1)
+        );
         height: 20rem;
         z-index: 7;
         width: 110vw;
@@ -67,7 +80,7 @@
     .menu-btn {
         cursor: pointer;
         position: absolute;
-        top:1rem;
+        top: 1rem;
         left: 7vw;
         border: none;
         background: none;
@@ -90,6 +103,7 @@
         min-height: 20rem;
         max-height: 20rem;
         overflow-y: scroll;
+        width: 700px;
         li {
             margin-top: 1rem;
             display: flex;
@@ -107,30 +121,29 @@
         .pointer {
             width: 30px;
             height: 35px;
-            border-left: .3rem solid #8D8686;
-            border-bottom: .3rem solid #8D8686;
-            transform: translateY(-.6rem);
-            margin-right: .75rem;
+            border-left: 0.3rem solid #8d8686;
+            border-bottom: 0.3rem solid #8d8686;
+            transform: translateY(-0.6rem);
+            margin-right: 0.75rem;
         }
-
         h2 {
             font-weight: normal;
-            font-family: 'GlacialIndifference-Bold', sans-serif;
+            font-family: "GlacialIndifference-Bold", sans-serif;
             color: white;
             text-transform: uppercase;
             font-size: 1.5rem;
-            letter-spacing: .5rem;
+            letter-spacing: 0.5rem;
         }
     }
     a {
         margin-top: 3rem;
         text-decoration: none;
         font-weight: normal;
-        font-family: 'GlacialIndifference-Bold', sans-serif;
+        font-family: "GlacialIndifference-Bold", sans-serif;
         color: white;
         text-transform: uppercase;
         font-size: 2.5rem;
-        letter-spacing: .75rem;
+        letter-spacing: 0.75rem;
 
         &:first-child {
             margin-top: 6rem;
@@ -144,7 +157,7 @@
             pointer-events: none;
             display: block;
             width: 150%;
-            transform: translate(-10%,-35%) rotate(-45deg);
+            transform: translate(-10%, -35%) rotate(-45deg);
         }
     }
 </style>

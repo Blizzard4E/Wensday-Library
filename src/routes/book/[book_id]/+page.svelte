@@ -20,7 +20,7 @@
         const resJson = await res.json();
         book = { ...resJson.book };
 
-        console.log(book)
+        console.log(book);
     });
 
     async function borrowBook(book_id) {
@@ -40,7 +40,7 @@
             book = { ...resJson.book };
         }
 
-        alert(data.message);
+        location.reload();
     }
 </script>
 
@@ -86,7 +86,9 @@
                 </div>
                 <div>
                     {#if !book?.has_active_borrow_requests}
-                        <button on:click={borrowBook(book?.book_id)}>Borrow</button>
+                        <button on:click={borrowBook(book?.book_id)}
+                            >Borrow</button
+                        >
                     {:else}
                         <button class="red">Not Available</button>
                     {/if}

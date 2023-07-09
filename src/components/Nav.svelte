@@ -4,69 +4,76 @@
     import SideNav from "./SideNav.svelte";
     import { goto } from "$app/navigation";
     import { onMount } from "svelte";
-    
+
     let userInfo;
-    user.subscribe(value => {
-        userInfo = value
-    })
+    user.subscribe((value) => {
+        userInfo = value;
+    });
 
     let adminInfo;
-    admin.subscribe(value => {
-        adminInfo = value
-    })
+    admin.subscribe((value) => {
+        adminInfo = value;
+    });
 
     onMount(() => {
-        if(adminInfo == null && userInfo == null) {
-            goto("/login")
+        if (adminInfo == null && userInfo == null) {
+            goto("/login");
         }
-    })
+    });
 
     let searchText;
     function searchPage() {
         if (searchText == null) {
             searchText = "";
         }
-        window.location = '../search?name=' + searchText;
+        window.location = "../search?name=" + searchText;
     }
 
     function logout() {
-        localStorage.removeItem('user_data');
-        localStorage.removeItem('admin_data');
+        localStorage.removeItem("user_data");
+        localStorage.removeItem("admin_data");
         user.set(null);
         admin.set(null);
-        goto("/login")
+        goto("/login");
     }
-
 </script>
+
 <div class="bg">
     <nav class="container">
         <section>
             <a class="library" href="../">Wensday</a>
             <form class="search" on:submit|preventDefault={searchPage}>
-                <input bind:value={searchText} type="text" placeholder="Search by books and authors">
-                <img src="/images/search.png" alt="Search Icon">
+                <input
+                    bind:value={searchText}
+                    type="text"
+                    placeholder="Search by books and authors"
+                />
+                <img src="/images/search.png" alt="Search Icon" />
             </form>
         </section>
         {#if userInfo != null || adminInfo != null}
-        <section class="right">
-            <a href="../../../">Home</a>
-            {#if adminInfo != null}
-                <a href="/addBook">Add Book</a>
-            {/if}
-            {#if adminInfo == null}
-                <a href="/profile" class="profile">
-                    <h1>{userInfo.username}</h1>
-                    <img src="{userInfo.profile_url}" alt="Profile">
-                </a>
-                <button on:click={logout}>Logout</button>
-            {:else}
-                <div href="/profile" class="profile">
-                    <h1 class="admin">{adminInfo.username}</h1>
-                    <img src="https://pbs.twimg.com/profile_images/557797323569250304/zpGjrYwi_400x400.png" alt="Profile">
-                </div>
-                <button on:click={logout}>Logout</button>
-            {/if}
-        </section>
+            <section class="right">
+                <a href="../../../">Home</a>
+                {#if adminInfo != null}
+                    <a href="/addBook">Add Book</a>
+                {/if}
+                {#if adminInfo == null}
+                    <a href="/profile" class="profile">
+                        <h1>{userInfo.username}</h1>
+                        <img src={userInfo.profile_url} alt="Profile" />
+                    </a>
+                    <button class="logout" on:click={logout}>Logout</button>
+                {:else}
+                    <div href="/profile" class="profile">
+                        <h1 class="admin">{adminInfo.username}</h1>
+                        <img
+                            src="https://pbs.twimg.com/profile_images/557797323569250304/zpGjrYwi_400x400.png"
+                            alt="Profile"
+                        />
+                    </div>
+                    <button class="logout" on:click={logout}>Logout</button>
+                {/if}
+            </section>
         {/if}
     </nav>
 </div>
@@ -88,13 +95,13 @@
         background-color: black;
     }
     * {
-        font-family: 'Poppins', sans-serif;
+        font-family: "Poppins", sans-serif;
     }
     nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: .5rem 0;
+        padding: 0.5rem 0;
 
         section {
             display: flex;
@@ -105,10 +112,10 @@
         text-transform: uppercase;
         font-weight: bold;
         font-size: 1rem;
-        padding: .25rem .5rem;
+        padding: 0.25rem 0.5rem;
         border-radius: 5px;
-        background-color: #BADEFA;
-        font-family: 'Poppins', sans-serif;
+        background-color: #badefa;
+        font-family: "Poppins", sans-serif;
         text-decoration: none;
         border: none;
         color: black;
@@ -126,9 +133,9 @@
         padding: 0.5rem 1.5rem;
         display: flex;
         align-items: center;
-        background-color: #EFF0F0;
+        background-color: #eff0f0;
 
-        img { 
+        img {
             width: 20px;
             opacity: 0.7;
             aspect-ratio: 1/1;
@@ -137,10 +144,10 @@
         input {
             margin-right: 1rem;
             border: none;
-            border-right: 2px solid #C1C0C1;
+            border-right: 2px solid #c1c0c1;
             width: 300px;
-            font-family: 'Poppins', sans-serif;
-            background-color: #EFF0F0;
+            font-family: "Poppins", sans-serif;
+            background-color: #eff0f0;
             color: black;
             font-size: 1rem;
 
@@ -163,7 +170,7 @@
         h1 {
             font-weight: 600;
             font-size: 1.3rem;
-            color: #63A4EA;
+            color: #63a4ea;
             margin-right: 1rem;
         }
         img {
@@ -181,17 +188,13 @@
             color: white;
             text-decoration: none;
         }
-        button {
-            background-color: #F5F5F5;
-            padding: .8rem;
-            aspect-ratio: 1/1;
-            border-radius: 50%;
-
-            img {
-                width: 26px;
-                display: block;
-            }
+        .logout {
+            border: none;
+            color: white;
+            padding: 0.25rem 0.25rem;
+            background-color: rgb(235, 50, 50);
+            font-size: 1rem;
+            cursor: pointer;
         }
     }
-    
 </style>
